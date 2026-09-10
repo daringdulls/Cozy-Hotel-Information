@@ -1,0 +1,7 @@
+.env*
+artifacts/
+tests/
+scripts/
+.agents/
+.claude/
+skills-lock.json

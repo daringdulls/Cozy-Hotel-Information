@@ -4,7 +4,9 @@
   "private": true,
   "description": "Cozy Hotels Maldives guest guide — static site + Vercel serverless admin API",
   "scripts": {
-    "dev": "vercel dev"
+    "dev": "vercel dev",
+    "preview": "node scripts/dev-server.js",
+    "test": "node tests/backend.test.cjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4"

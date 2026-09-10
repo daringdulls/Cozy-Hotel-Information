@@ -1,131 +1,58 @@
-# Cozy Hotels Maldives — Guest Guide
+# Cozy Hotels Maldives — Guest guide
 
-Guest information site for Cozy Hotels Maldives, with a password-protected
-admin panel for updating hours, contacts, Wi-Fi, policies and photos —
-changes appear on the live site immediately, no redeploy needed.
+Responsive guest guides for Cozy Nest, Cozy Roots and Cozy Arts, with a shared hotel hub and password-protected content editor.
 
-## Pages
+## Guest pages
 
-| Page | Purpose |
-|---|---|
-| `index.html` | "Our Hotels" hub — links to each property |
-| `cozy-nest.html` | Cozy Nest Fuvahmulah guest guide |
-| `cozy-roots.html` | Cozy Roots Fuvahmulah guest guide |
-| `cozy-arts.html` | Cozy Arts Dhangethi guest guide |
-| `qr-codes.html` | Staff tool — printable QR codes linking to each property page |
-| `admin.html` | Password-protected content editor |
+- `/` — choose a hotel
+- `/cozy-nest.html`, `/cozy-roots.html`, `/cozy-arts.html` — property guides
+- `/qr-codes.html` — printable room QR codes
+- `/admin.html` — staff content editor
 
-Each property has its own dedicated page and QR code, independent of the others.
-Guests scanning a room QR code land directly on that property's page.
+The guides use a teal, photo-led layout with ten navigation tiles, opening hours, dining and diving cards, island highlights, WhatsApp requests, and expandable hotel information. Existing property-specific details are retained.
 
-## How content editing works
+## Editing information and photos
 
-- `/admin` is a password-gated page (`ADMIN_PASSWORD` below) with a form per property.
-- Saving writes to a Postgres database via `/api/content` (a Vercel serverless function).
-- Every guest page loads `assets/js/content-loader.js`, which fetches the latest
-  values on page view and swaps them into hours, Wi-Fi, phone numbers, policies,
-  notices, the menu link and photos.
-- If the database isn't connected yet, or a request fails, the page simply shows
-  the values already written into the HTML — nothing ever breaks or goes blank.
+1. Open `/admin.html` and sign in with the existing `ADMIN_PASSWORD`.
+2. Choose a hotel or Shared contacts.
+3. Edit the welcome/about text, dining and diving descriptions, hours, Wi-Fi, notices, island highlight labels, or the detailed guest information.
+4. In Photo library, choose a JPG, PNG or WebP from your computer, or paste an HTTP(S) image URL. Preview it before saving. Uploaded images are resized to at most 1400 px and compressed to WebP. “Use default photo” restores the bundled sample for that slot.
+5. Click **Save changes**. Reload the guest guide to see the update.
 
-**Editable per property:** check-in/out & reception hours, dining hours, Wi-Fi
-network/password, the policies line, the two notice boxes, the menu link, and
-4 photos (hero, about, dining, transfers). **Editable site-wide:** the 3 phone
-numbers and the Instagram link. Everything else (page structure, activities
-list, island guide, section order) lives in the HTML/CSS and is a code change.
+The initial photographs are sample Unsplash images, not verified photographs of these properties or island locations. Replace them with approved hotel photography before a public launch.
 
-## Part 1 — Push this code to GitHub
+Saved text and compressed photos persist together in Neon Postgres. No image-storage subscription is required for this small fixed photo library. Each uploaded photo is limited to 280,000 data-URL characters in the editor; a content document is capped at 3.5 MB. For a large gallery, use dedicated object storage instead.
 
-You'll need a free [GitHub account](https://github.com/signup) if you don't have one.
+Requests open WhatsApp with a prepared message; they do not send automatically. If no restaurant menu URL is configured, the menu button opens a request to the restaurant. Shared contact edits also update these links.
 
-1. On [github.com/new](https://github.com/new), create a new **empty** repository
-   (no README/license/gitignore — this project already has them). Note its URL,
-   e.g. `https://github.com/<your-username>/cozy-hotels-guest-guide.git`.
-2. In this folder, run:
-   ```bash
-   git remote add origin https://github.com/<your-username>/cozy-hotels-guest-guide.git
-   git push -u origin main
-   ```
-   (This repo is already initialized locally with one commit — this just connects
-   and uploads it.)
+## Production configuration
 
-## Part 2 — Deploy on Vercel
+Required Vercel environment variables:
 
-1. Sign up / log in at [vercel.com](https://vercel.com) (the free "Hobby" plan works),
-   using **"Continue with GitHub"** so it can see your repos.
-2. Click **Add New → Project**, select the repo you just pushed, and click **Import**.
-3. Framework Preset: leave as **Other** — no build command, no output directory needed.
-4. Before clicking Deploy, open **Environment Variables** and add:
-   | Name | Value |
-   |---|---|
-   | `SESSION_SECRET` | a random string — generate one with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
-   | `ADMIN_PASSWORD` | the password you'll use to log into `/admin` |
-5. Click **Deploy**. You'll get a live URL like `https://cozy-hotels-guest-guide.vercel.app`.
+- `DATABASE_URL` — valid Neon Postgres connection URL (automatically supplied by the integration)
+- `ADMIN_PASSWORD` — staff sign-in password
+- `SESSION_SECRET` — random secret for signed sessions
 
-Every future `git push` to `main` auto-deploys.
+The `cozy-hotel-content` Neon Free resource is connected to this Vercel project. Redeploy after changing environment variables. Authentication uses an HttpOnly, SameSite cookie (Secure on Vercel). Public reads are allowed; writes require an authenticated session. Text is rendered without HTML interpretation and links/images are validated.
 
-## Part 3 — Connect the database (Postgres via Neon)
+Content defaults are in `data/content/`. Database records overlay new defaults so existing saved content survives design/schema additions. In local development without a database, saves update these JSON files. Production rejects saves without a database.
 
-The admin panel works and logs in without this step, but **saving** needs a database.
+## Local development
 
-1. In your Vercel project, go to **Storage → Create Database** (or **Marketplace**
-   if Storage doesn't show it directly) and choose **Neon** (Postgres) — it has a
-   free tier that's plenty for this site.
-2. Follow the prompts to create the database and connect it to this project.
-   Vercel will automatically add a `DATABASE_URL` environment variable — no
-   copy-pasting needed.
-3. Redeploy (Vercel usually prompts you to; otherwise **Deployments → ⋯ → Redeploy**).
-4. Visit `/admin`, log in, and the badge at the top should switch from
-   "No database yet" to "Database connected". Saved changes now persist and
-   show up instantly on the guest pages for every visitor.
-
-## Part 4 — Everyday use
-
-- **Guests:** scan the QR code at their property → lands straight on that page.
-- **Staff:** open `/qr-codes.html` on the *live* site (not localhost) and print —
-  the codes always encode whatever domain they're opened from, so they'll be
-  correct for your real Vercel/custom domain.
-- **Editing content:** open `/admin`, log in with `ADMIN_PASSWORD`, edit, Save.
-
-## Run locally (optional, for development)
-
-Static preview only (no admin saving, since that needs the API + database):
-```bash
-python -m http.server 8934
-```
-
-To test the admin/API locally with a database, use the Vercel CLI:
-```bash
+```powershell
 npm install
-npx vercel dev
+$env:ADMIN_PASSWORD = 'choose-a-local-password'
+$env:PORT = '4173'
+npm run preview
 ```
 
-## Structure
+Open `http://localhost:4173/cozy-nest.html` or `/admin.html`. The preview server uses the same API handlers and serves only public HTML/assets; environment files and internal code cannot be downloaded.
 
-```
-data/content/       — seed JSON per scope (site, cozy-nest, cozy-roots, cozy-arts);
-                       also the fallback used whenever the database is empty/unset
-lib/db.js            — reads/writes content (Postgres if configured, else the seed files)
-lib/session.js       — signed-cookie admin session (no external auth dependency)
-lib/readBody.js      — JSON body parsing helper for the API routes
-api/content.js       — GET (public) / PUT (auth) content by scope
-api/login.js         — checks ADMIN_PASSWORD, sets the session cookie
-api/logout.js        — clears the session cookie
-api/session.js       — reports whether the current visitor is signed in
-assets/css/style.css — shared design system (brand colors, type, components)
-assets/js/icons.js   — inline SVG icon set, injected via [data-icon]
-assets/js/qrcode.lib.js — vendored QR generator (MIT, kazuhikoarase/qrcode-generator)
-assets/js/qr.js      — renders QR codes into [data-qr] elements
-assets/js/content-loader.js — overlays live content onto the guest pages
-assets/js/admin.js   — admin panel login, forms, save
-assets/js/main.js    — mobile menu + back-to-top behavior
-```
+Alternatively, `npm run dev` runs Vercel's local environment. Never commit `.env` files.
 
-## Still to fill in
+## Checks
 
-- Real property photos — either paste image URLs into `/admin`, or replace the
-  placeholder blocks in the HTML directly
-- Exact check-in / check-out policy wording, if different from the current default
-- Restaurant menu link — paste the URL into `/admin` once you have one
-- Cozy Roots / Cozy Arts Instagram handles, if different from Cozy Nest's
-  (currently the same Instagram link is used site-wide)
+- `npm test` — data validation, safe merge behavior, and Neon array response handling.
+- `node tests/guest-guide.cjs` — browser integration checks against a running local preview. Requires Playwright accessible to Node and Microsoft Edge. `TEST_URL` and `ADMIN_PASSWORD` can override the local test target/credentials. The test temporarily edits the local Cozy Nest seed and restores it afterward; use only a local preview with file storage.
+
+Browser coverage includes three properties at desktop/mobile sizes, disclosures and keyboard navigation, hotel hub, rejected sign-in, authenticated editing, image upload, save/reload, unsafe URL rejection, and logout.

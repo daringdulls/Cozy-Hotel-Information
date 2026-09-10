@@ -1,14 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Admin — Cozy Hotels Maldives</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<meta content="noindex, nofollow" name="robots"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/style.css" rel="stylesheet"/>
 <style>
   .admin-wrap{ max-width: 760px; margin: 0 auto; padding: 40px 20px 100px; }
   .admin-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 24px; }
@@ -47,176 +48,44 @@
   @media(max-width:560px){ .row2{ grid-template-columns: 1fr; } }
   .save-row{ display:flex; align-items:center; gap: 14px; margin-top: 20px; }
 </style>
-</head>
+<link href="assets/css/guide.css" rel="stylesheet"/><link href="assets/css/admin.css" rel="stylesheet"/></head>
 <body>
-
-<div id="login-view" class="admin-wrap">
-  <div class="login-card">
-    <h1>Cozy Hotels Admin</h1>
-    <form id="login-form">
-      <div class="field">
-        <label for="password">Password</label>
-        <input type="password" id="password" autocomplete="current-password" required>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-      <div class="error-msg" id="login-error"></div>
-    </form>
-  </div>
+<div class="admin-wrap" id="login-view">
+<div class="login-card">
+<h1>Cozy Hotels Admin</h1>
+<form id="login-form">
+<div class="field">
+<label for="password">Password</label>
+<input autocomplete="current-password" id="password" required="" type="password"/>
 </div>
-
-<div id="app-view" class="admin-wrap" hidden>
-  <div class="admin-head">
-    <h1>Content Admin</h1>
-    <div style="display:flex; align-items:center; gap:10px;">
-      <span id="db-badge" class="db-badge off">Checking database…</span>
-      <button class="btn btn-outline-dark btn-sm" id="logout-btn">Log Out</button>
-    </div>
-  </div>
-
-  <div class="tabs">
-    <button class="tab-btn active" data-scope="site">Site Contacts</button>
-    <button class="tab-btn" data-scope="cozy-nest">Cozy Nest</button>
-    <button class="tab-btn" data-scope="cozy-roots">Cozy Roots</button>
-    <button class="tab-btn" data-scope="cozy-arts">Cozy Arts</button>
-  </div>
-
-  <!-- SITE -->
-  <div class="panel active" data-panel="site">
-    <h2>Shared Contacts</h2>
-    <p style="color:var(--ink-soft); font-size:13px; margin-bottom:14px;">Used across all three property pages.</p>
-    <div class="row2">
-      <div class="field"><label>Hotel (general)</label><input data-path="phones.hotel" placeholder="+9607721818"></div>
-      <div class="field"><label>Reservations &amp; Diving</label><input data-path="phones.diving" placeholder="+9607909494"></div>
-    </div>
-    <div class="field"><label>Restaurant</label><input data-path="phones.restaurant" placeholder="+9607873535"></div>
-    <div class="field"><label>Instagram URL</label><input data-path="instagram" placeholder="https://www.instagram.com/..."></div>
-    <div class="save-row">
-      <button class="btn btn-primary save-btn" data-scope="site">Save Changes</button>
-      <span class="status-msg" data-status="site"></span>
-    </div>
-  </div>
-
-  <!-- COZY NEST -->
-  <div class="panel" data-panel="cozy-nest">
-    <h2>Cozy Nest Fuvahmulah</h2>
-    <div class="group-title">Hotel Hours</div>
-    <div class="row2">
-      <div class="field"><label>Reception</label><input data-path="hours.reception"></div>
-      <div class="field"><label>Housekeeping Hours</label><input data-path="hours.housekeeping"></div>
-      <div class="field"><label>Check-in</label><input data-path="hours.checkin"></div>
-      <div class="field"><label>Check-out</label><input data-path="hours.checkout"></div>
-    </div>
-    <div class="group-title">Dining Hours</div>
-    <div class="row2">
-      <div class="field"><label>Restaurant Open</label><input data-path="dining.open"></div>
-      <div class="field"><label>Breakfast</label><input data-path="dining.breakfast"></div>
-      <div class="field"><label>Lunch</label><input data-path="dining.lunch"></div>
-      <div class="field"><label>Dinner</label><input data-path="dining.dinner"></div>
-    </div>
-    <div class="field"><label>Menu Link (URL)</label><input data-path="menuUrl" placeholder="https://..."></div>
-    <div class="group-title">Wi-Fi</div>
-    <div class="row2">
-      <div class="field"><label>Network Name</label><input data-path="wifi.network"></div>
-      <div class="field"><label>Password</label><input data-path="wifi.password"></div>
-    </div>
-    <div class="group-title">Policies &amp; Notices</div>
-    <div class="field"><label>Policies line</label><input data-path="policies"></div>
-    <div class="field"><label>Transfer / weather notice</label><textarea data-path="notices.transfer"></textarea></div>
-    <div class="field"><label>Guest rules notice</label><textarea data-path="notices.rules"></textarea></div>
-    <div class="group-title">Photos (image URLs — leave blank to keep placeholder)</div>
-    <div class="row2">
-      <div class="field"><label>Hero photo</label><input data-path="photos.hero" placeholder="https://..."></div>
-      <div class="field"><label>About photo</label><input data-path="photos.about" placeholder="https://..."></div>
-      <div class="field"><label>Dining photo</label><input data-path="photos.dining" placeholder="https://..."></div>
-      <div class="field"><label>Transfers photo</label><input data-path="photos.transfers" placeholder="https://..."></div>
-    </div>
-    <div class="save-row">
-      <button class="btn btn-primary save-btn" data-scope="cozy-nest">Save Changes</button>
-      <span class="status-msg" data-status="cozy-nest"></span>
-    </div>
-  </div>
-
-  <!-- COZY ROOTS -->
-  <div class="panel" data-panel="cozy-roots">
-    <h2>Cozy Roots Fuvahmulah</h2>
-    <div class="group-title">Hotel Hours</div>
-    <div class="row2">
-      <div class="field"><label>Reception</label><input data-path="hours.reception"></div>
-      <div class="field"><label>Housekeeping Hours</label><input data-path="hours.housekeeping"></div>
-      <div class="field"><label>Check-in</label><input data-path="hours.checkin"></div>
-      <div class="field"><label>Check-out</label><input data-path="hours.checkout"></div>
-    </div>
-    <div class="group-title">Dining Hours</div>
-    <div class="row2">
-      <div class="field"><label>Restaurant Open</label><input data-path="dining.open"></div>
-      <div class="field"><label>Breakfast</label><input data-path="dining.breakfast"></div>
-      <div class="field"><label>Lunch</label><input data-path="dining.lunch"></div>
-      <div class="field"><label>Dinner</label><input data-path="dining.dinner"></div>
-    </div>
-    <div class="field"><label>Menu Link (URL)</label><input data-path="menuUrl" placeholder="https://..."></div>
-    <div class="group-title">Wi-Fi</div>
-    <div class="row2">
-      <div class="field"><label>Network Name</label><input data-path="wifi.network"></div>
-      <div class="field"><label>Password</label><input data-path="wifi.password"></div>
-    </div>
-    <div class="group-title">Policies &amp; Notices</div>
-    <div class="field"><label>Policies line</label><input data-path="policies"></div>
-    <div class="field"><label>Transfer / weather notice</label><textarea data-path="notices.transfer"></textarea></div>
-    <div class="field"><label>Guest rules notice</label><textarea data-path="notices.rules"></textarea></div>
-    <div class="group-title">Photos (image URLs — leave blank to keep placeholder)</div>
-    <div class="row2">
-      <div class="field"><label>Hero photo</label><input data-path="photos.hero" placeholder="https://..."></div>
-      <div class="field"><label>About photo</label><input data-path="photos.about" placeholder="https://..."></div>
-      <div class="field"><label>Dining photo</label><input data-path="photos.dining" placeholder="https://..."></div>
-      <div class="field"><label>Transfers photo</label><input data-path="photos.transfers" placeholder="https://..."></div>
-    </div>
-    <div class="save-row">
-      <button class="btn btn-primary save-btn" data-scope="cozy-roots">Save Changes</button>
-      <span class="status-msg" data-status="cozy-roots"></span>
-    </div>
-  </div>
-
-  <!-- COZY ARTS -->
-  <div class="panel" data-panel="cozy-arts">
-    <h2>Cozy Arts Dhangethi</h2>
-    <div class="group-title">Hotel Hours</div>
-    <div class="row2">
-      <div class="field"><label>Reception</label><input data-path="hours.reception"></div>
-      <div class="field"><label>Housekeeping Hours</label><input data-path="hours.housekeeping"></div>
-      <div class="field"><label>Check-in</label><input data-path="hours.checkin"></div>
-      <div class="field"><label>Check-out</label><input data-path="hours.checkout"></div>
-    </div>
-    <div class="group-title">Dining Hours</div>
-    <div class="row2">
-      <div class="field"><label>Restaurant Open</label><input data-path="dining.open"></div>
-      <div class="field"><label>Breakfast</label><input data-path="dining.breakfast"></div>
-      <div class="field"><label>Lunch</label><input data-path="dining.lunch"></div>
-      <div class="field"><label>Dinner</label><input data-path="dining.dinner"></div>
-    </div>
-    <div class="field"><label>Menu Link (URL)</label><input data-path="menuUrl" placeholder="https://..."></div>
-    <div class="group-title">Wi-Fi</div>
-    <div class="row2">
-      <div class="field"><label>Network Name</label><input data-path="wifi.network"></div>
-      <div class="field"><label>Password</label><input data-path="wifi.password"></div>
-    </div>
-    <div class="group-title">Policies &amp; Notices</div>
-    <div class="field"><label>Policies line</label><input data-path="policies"></div>
-    <div class="field"><label>Transfer / weather notice</label><textarea data-path="notices.transfer"></textarea></div>
-    <div class="field"><label>Guest rules notice</label><textarea data-path="notices.rules"></textarea></div>
-    <div class="group-title">Photos (image URLs — leave blank to keep placeholder)</div>
-    <div class="row2">
-      <div class="field"><label>Hero photo</label><input data-path="photos.hero" placeholder="https://..."></div>
-      <div class="field"><label>About photo</label><input data-path="photos.about" placeholder="https://..."></div>
-      <div class="field"><label>Dining photo</label><input data-path="photos.dining" placeholder="https://..."></div>
-      <div class="field"><label>Transfers photo</label><input data-path="photos.transfers" placeholder="https://..."></div>
-    </div>
-    <div class="save-row">
-      <button class="btn btn-primary save-btn" data-scope="cozy-arts">Save Changes</button>
-      <span class="status-msg" data-status="cozy-arts"></span>
-    </div>
-  </div>
+<button class="btn btn-primary btn-block" type="submit">Sign In</button>
+<div class="error-msg" id="login-error" role="status"></div>
+</form>
 </div>
-
+</div>
+<div class="admin-wrap" hidden="" id="app-view">
+<div class="admin-head">
+<h1>Content Admin</h1>
+<div style="display:flex; align-items:center; gap:10px;">
+<span class="db-badge off" id="db-badge">Checking database…</span>
+<button class="btn btn-outline-dark btn-sm" id="logout-btn">Log Out</button>
+</div>
+</div>
+<div class="tabs">
+<button class="tab-btn active" data-scope="site">Site Contacts</button>
+<button class="tab-btn" data-scope="cozy-nest">Cozy Nest</button>
+<button class="tab-btn" data-scope="cozy-roots">Cozy Roots</button>
+<button class="tab-btn" data-scope="cozy-arts">Cozy Arts</button>
+</div>
+<!-- SITE -->
+<div class="panel active" data-panel="site">Loading content…</div>
+<!-- COZY NEST -->
+<div class="panel" data-panel="cozy-nest">Loading content…</div>
+<!-- COZY ROOTS -->
+<div class="panel" data-panel="cozy-roots">Loading content…</div>
+<!-- COZY ARTS -->
+<div class="panel" data-panel="cozy-arts">Loading content…</div>
+</div>
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/admin.js"></script>
 </body>

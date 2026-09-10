@@ -1,6 +1,7 @@
 const { getContent, setContent, isValidScope, VALID_SCOPES, hasDatabase } = require('../lib/db');
 const { isAuthenticated } = require('../lib/session');
 const { readJsonBody } = require('../lib/readBody');
+const { validateContent } = require('../lib/validateContent');
 
 module.exports = async (req, res) => {
   if (req.method === 'GET') {
@@ -14,7 +15,7 @@ module.exports = async (req, res) => {
       res.setHeader('Cache-Control', 'no-store');
       res.status(200).json({ scope, data, updatedAt, source, hasDatabase: hasDatabase() });
     } catch (err) {
-      res.status(500).json({ error: 'Failed to load content: ' + err.message });
+      res.status(500).json({ error: 'Content could not be loaded. Please try again.' });
     }
     return;
   }
@@ -34,11 +35,13 @@ module.exports = async (req, res) => {
       res.status(400).json({ error: 'data must be an object.' });
       return;
     }
+    const validationError = validateContent(data);
+    if (validationError) { res.status(400).json({ error: validationError }); return; }
     try {
       await setContent(scope, data);
       res.status(200).json({ ok: true });
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      res.status(500).json({ error: hasDatabase() ? 'Could not save your changes. Please try again.' : 'Connect a database in Vercel before saving changes.' });
     }
     return;
   }

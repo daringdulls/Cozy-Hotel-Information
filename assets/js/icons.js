@@ -3,17 +3,17 @@
 (function(){
   var s = 'stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
   var ICONS = {
-    logo: '<svg viewBox="0 0 24 24" '+s+'><path d="M12 2c2 3 2 5 0 7-2-2-2-4 0-7Z"/><path d="M12 9c3 1 5 3 5 6-3 0-5-2-5-6Z"/><path d="M12 9c-3 1-5 3-5 6 3 0 5-2 5-6Z"/><path d="M12 15v7"/></svg>',
+    logo: '<svg viewBox="0 0 68 28" fill="none" stroke="currentColor" stroke-width="3.3" stroke-linecap="round"><path d="M3 10C16-7 27 24 49 14c7-3 10-6 15-10M3 20C17 5 28 34 53 21c5-3 8-5 11-8"/></svg>',
     menu: '<svg viewBox="0 0 24 24" '+s+'><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
     close: '<svg viewBox="0 0 24 24" '+s+'><path d="M6 6l12 12M18 6L6 18"/></svg>',
-    bed: '<svg viewBox="0 0 24 24" '+s+'><path d="M3 18v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7"/><path d="M3 18v2M21 18v2"/><path d="M3 13v-1a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1"/><circle cx="7" cy="9" r="1.4"/></svg>',
+    bed: '<svg viewBox="0 0 24 24" '+s+'><path d="M4 10V4h16v6M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8M2 16h20M5 20v-4M19 20v-4"/><rect x="6" y="6" width="5" height="4" rx="1"/><rect x="13" y="6" width="5" height="4" rx="1"/></svg>',
     restaurant: '<svg viewBox="0 0 24 24" '+s+'><path d="M7 3v7a2 2 0 0 0 2 2v9"/><path d="M7 3v5M10 3v5"/><path d="M17 3c-1.5 0-2 2-2 4s.7 3 2 3v11"/></svg>',
     mask: '<svg viewBox="0 0 24 24" '+s+'><path d="M4 9c0-3 3-5 8-5s8 2 8 5-2 6-4 6c-1.5 0-2-1.5-4-1.5S9.5 15 8 15c-2 0-4-3-4-6Z"/><path d="M4 9H2M20 9h2"/></svg>',
-    scuba: '<svg viewBox="0 0 24 24" '+s+'><circle cx="9" cy="8" r="3.5"/><path d="M12 8h4a2 2 0 0 1 2 2v1"/><path d="M4 20c2-4 3-6 3-9M14 20c-1-3-1.5-5-1.5-8"/></svg>',
+    scuba: '<svg viewBox="0 0 24 24" '+s+'><rect x="3" y="6" width="7" height="15" rx="2"/><rect x="14" y="6" width="7" height="15" rx="2"/><path d="M6.5 6V2M17.5 6V2M4 2h5M15 2h5M3 17h7M14 17h7"/></svg>',
     bike: '<svg viewBox="0 0 24 24" '+s+'><circle cx="6" cy="17" r="3.2"/><circle cx="18" cy="17" r="3.2"/><path d="M6 17l4-9h4l3 6"/><path d="M10 8h3M9 17h6l-3-6"/></svg>',
     transfer: '<svg viewBox="0 0 24 24" '+s+'><path d="M4 16V9a2 2 0 0 1 2-2h9l4 4v5"/><circle cx="8" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/><path d="M4 16h2M15 16h1M4 12h11"/></svg>',
     pin: '<svg viewBox="0 0 24 24" '+s+'><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>',
-    tray: '<svg viewBox="0 0 24 24" '+s+'><rect x="4" y="5" width="16" height="4" rx="1.2"/><path d="M6 9v9a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9"/><path d="M10 13h4"/></svg>',
+    tray: '<svg viewBox="0 0 24 24" '+s+'><path d="M3 17a9 9 0 0 1 18 0H3ZM2 21h20M12 8V4M10 4h4"/></svg>',
     doc: '<svg viewBox="0 0 24 24" '+s+'><path d="M7 3h7l4 4v14H7Z"/><path d="M14 3v4h4"/><path d="M9.5 13h5M9.5 16.5h5"/></svg>',
     phone: '<svg viewBox="0 0 24 24" '+s+'><path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2C10 19 5 14 4 6a2 2 0 0 1 2-2Z"/></svg>',
     'phone-alert': '<svg viewBox="0 0 24 24" '+s+'><path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2C10 19 5 14 4 6a2 2 0 0 1 2-2Z"/><path d="M19 3v4M19 9.2v.1"/></svg>',
