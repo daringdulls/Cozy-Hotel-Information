@@ -28,13 +28,15 @@
   --shadow-sm:    0 2px 10px rgba(9,59,22,0.07);
   --shadow-md:    0 10px 30px rgba(9,59,22,0.12);
 
-  /* Avenir is a licensed commercial typeface: Apple devices already have it
-     installed system-wide, so it's listed first and will render there for
-     free. Everywhere else falls back to Poppins (loaded from Google Fonts),
-     a geometric sans with the closest free match to Avenir's shape. */
-  --font-display: 'Avenir Next', Avenir, 'Poppins', 'Segoe UI', sans-serif;
-  --font-editorial: 'Avenir Next', Avenir, 'Poppins', 'Segoe UI', sans-serif;
-  --font-body: 'Avenir Next', Avenir, 'Poppins', 'Segoe UI', sans-serif;
+  /* Avenir is a licensed commercial typeface — Apple devices already have it
+     installed, so it's listed first and renders there for free. Elsewhere,
+     headlines fall back to Jost (a geometric sans in the same Futura/Avenir
+     family, with more character than a generic UI font) and body copy falls
+     back to Inter (built for small-size legibility). Both load from Google
+     Fonts. Still entirely sans-serif, just with a touch more hierarchy. */
+  --font-display: 'Avenir Next', Avenir, 'Jost', 'Segoe UI', sans-serif;
+  --font-editorial: 'Avenir Next', Avenir, 'Jost', 'Segoe UI', sans-serif;
+  --font-body: 'Avenir Next', Avenir, 'Inter', 'Segoe UI', sans-serif;
 }
 
 *, *::before, *::after{ box-sizing: border-box; }
