@@ -1,0 +1,12 @@
+{
+  "name": "cozy-hotels-guest-guide",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cozy Hotels Maldives guest guide — static site + Vercel serverless admin API",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4"
+  }
+}

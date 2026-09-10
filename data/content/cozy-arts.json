@@ -1,0 +1,30 @@
+{
+  "hours": {
+    "reception": "24 Hours",
+    "checkin": "14:00",
+    "checkout": "12:00",
+    "housekeeping": "09:00 – 17:00"
+  },
+  "dining": {
+    "open": "07:00 – 22:00",
+    "breakfast": "07:00 – 10:00",
+    "lunch": "12:00 – 15:00",
+    "dinner": "19:00 – 21:30"
+  },
+  "wifi": {
+    "network": "Cozy-Arts-Guest",
+    "password": "Ask reception"
+  },
+  "policies": "No smoking indoors · quiet hours 22:00–07:00",
+  "menuUrl": "",
+  "notices": {
+    "transfer": "Speedboat schedules to/from Maamigili airport can shift with weather and sea conditions. Please confirm your transfer time with reception the evening before departure.",
+    "rules": "Guest rules: no smoking indoors, quiet hours 22:00–07:00. Swimwear is welcome at Bikini Beach and the house reef — please dress modestly elsewhere on the island out of respect for local custom."
+  },
+  "photos": {
+    "hero": "",
+    "about": "",
+    "dining": "",
+    "transfers": ""
+  }
+}

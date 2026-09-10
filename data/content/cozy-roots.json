@@ -1,0 +1,30 @@
+{
+  "hours": {
+    "reception": "24 Hours",
+    "checkin": "14:00",
+    "checkout": "12:00",
+    "housekeeping": "09:00 – 17:00"
+  },
+  "dining": {
+    "open": "07:00 – 22:00",
+    "breakfast": "07:00 – 10:00",
+    "lunch": "12:00 – 15:00",
+    "dinner": "19:00 – 21:30"
+  },
+  "wifi": {
+    "network": "Cozy-Roots-Guest",
+    "password": "Ask reception"
+  },
+  "policies": "No smoking indoors · quiet hours 22:00–07:00",
+  "menuUrl": "",
+  "notices": {
+    "transfer": "Flight and ferry schedules to Fuvahmulah can shift with weather. Please confirm your transfer time with reception the evening before departure.",
+    "rules": "Guest rules: no smoking indoors, quiet hours 22:00–07:00, and please respect local dress customs when exploring outside the hotel."
+  },
+  "photos": {
+    "hero": "",
+    "about": "",
+    "dining": "",
+    "transfers": ""
+  }
+}
