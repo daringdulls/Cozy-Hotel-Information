@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Codes — Cozy Hotels Maldives</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Printable QR codes linking to each Cozy Hotels property guest guide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .qr-page{ max-width: 980px; margin: 0 auto; padding: 40px 20px 80px; }
+  .qr-intro{ text-align: center; margin-bottom: 32px; }
+  .qr-intro h1{ font-family: var(--font-display); font-size: clamp(28px,5vw,40px); color: var(--green); }
+  .qr-intro p{ color: var(--ink-soft); margin-top: 10px; max-width: 56ch; margin-left:auto; margin-right:auto; }
+  .qr-actions{ display:flex; justify-content:center; gap:10px; margin-top:18px; }
+  .qr-grid{ display:grid; grid-template-columns: 1fr; gap: 24px; margin-top: 30px; }
+  @media(min-width:760px){ .qr-grid{ grid-template-columns: repeat(3, 1fr); } }
+  .qr-card{
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 28px 20px;
+    text-align: center;
+    break-inside: avoid;
+  }
+  .qr-card .eyebrow{ font-size: 11px; }
+  .qr-card h2{ font-family: var(--font-editorial); font-size: 20px; color: var(--green); margin-top: 4px; }
+  .qr-box{
+    width: 210px; height: 210px;
+    margin: 18px auto 12px;
+    padding: 14px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+  .qr-url{ font-size: 11px; color: var(--ink-soft); word-break: break-all; margin-top: 6px; }
+  .qr-card .btn{ margin-top: 14px; }
+
+  @media print{
+    .site-header, .qr-intro, .to-top{ display:none !important; }
+    body{ background: #fff; }
+    .qr-page{ padding: 0; max-width: none; }
+    .qr-grid{ grid-template-columns: 1fr 1fr; gap: 18px; }
+    .qr-card{ box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><span class="icon" data-icon="logo"></span></span>
+      <span class="brand-text"><strong>Cozy Hotels</strong><span>Maldives</span></span>
+    </a>
+    <div class="header-actions">
+      <a class="our-hotels-btn" href="index.html">
+        <span class="icon" data-icon="building"></span> Our Hotels
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="qr-page">
+  <div class="qr-intro">
+    <p class="eyebrow">Staff Tool</p>
+    <h1>Property QR Codes</h1>
+    <p>Each code opens that property's guest guide directly — print and place at reception, in rooms, or on welcome cards. Codes always point to this site's current address, so they stay correct after every update.</p>
+    <div class="qr-actions">
+      <button class="btn btn-primary" onclick="window.print()"><span class="icon" data-icon="doc"></span> Print This Page</button>
+    </div>
+  </div>
+
+  <div class="qr-grid">
+    <div class="qr-card">
+      <p class="eyebrow">Fuvahmulah</p>
+      <h2>Cozy Nest</h2>
+      <div class="qr-box" data-qr="cozy-nest.html" data-qr-size="5"></div>
+      <div class="qr-url" data-qr-url></div>
+    </div>
+    <div class="qr-card">
+      <p class="eyebrow">Fuvahmulah</p>
+      <h2>Cozy Roots</h2>
+      <div class="qr-box" data-qr="cozy-roots.html" data-qr-size="5"></div>
+      <div class="qr-url" data-qr-url></div>
+    </div>
+    <div class="qr-card">
+      <p class="eyebrow">Dhangethi</p>
+      <h2>Cozy Arts</h2>
+      <div class="qr-box" data-qr="cozy-arts.html" data-qr-size="5"></div>
+      <div class="qr-url" data-qr-url></div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/qrcode.lib.js"></script>
+<script src="assets/js/qr.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
