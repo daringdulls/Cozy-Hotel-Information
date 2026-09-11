@@ -62,3 +62,9 @@ Browser coverage includes three properties at desktop/mobile sizes, disclosures 
 The guest layout expands up to 1,680 px on wide screens. Cozy Nest includes four gallery slots with a keyboard-accessible full-size viewer. In the editor, use **Photo library → Gallery1–Gallery4** to upload gallery images, and **Gallery title & captions** to edit their captions. Empty gallery slots reuse the current hero, about, dining and diving images.
 
 **Practical guest information** contains currency, time, payments, room keys, clothing, laundry, diving school, excursions, property damage and tips. New fields are merged with saved database content; no existing records or photos need to be replaced.
+
+## Shared dining and guest reviews
+
+Cozy Roots uses Cozy Deck Restaurant. Its dining hours, menu URL and dining photo come from Cozy Nest, so update those in the Cozy Nest editor. Cozy Arts restaurant blocks are hidden for now; saved settings are retained.
+
+Every property has **Guest review links** in the editor, with separate Google and Tripadvisor URL fields. Save the exact property review URLs to show the buttons. Blank URLs hide their buttons; when both are blank the entire review section is hidden.

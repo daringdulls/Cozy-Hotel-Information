@@ -124,5 +124,9 @@
     "label2": "Island tour",
     "label3": "Local restaurants",
     "label4": "Shops & essentials"
+  },
+  "reviews": {
+    "googleUrl": "",
+    "tripadvisorUrl": ""
   }
 }

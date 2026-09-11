@@ -6,12 +6,12 @@
     "housekeeping": "09:00 – 17:00"
   },
   "dining": {
-    "open": "07:00 – 22:00",
+    "open": "07:00 – 23:00",
     "breakfast": "07:00 – 10:00",
     "lunch": "12:00 – 15:00",
-    "dinner": "19:00 – 21:30",
-    "title": "Roots Café",
-    "description": "Simple, fresh, home-style cooking served in our garden courtyard."
+    "dinner": "19:00 – 22:00",
+    "title": "Cozy Deck Restaurant",
+    "description": "Cozy Roots guests enjoy their meals at Cozy Deck Restaurant, shared with Cozy Nest."
   },
   "wifi": {
     "network": "Cozy-Roots-Guest",
@@ -55,7 +55,7 @@
     "hotel_info_6": "Policies",
     "hotel_info_8": "Facilities",
     "dining_0": "Roots Café",
-    "dining_1": "Simple, fresh, home-style cooking served in our garden courtyard.",
+    "dining_1": "Cozy Roots guests enjoy their meals at Cozy Deck Restaurant, shared with Cozy Nest.",
     "services_0": "Hotel Services",
     "services_1": "Everything you need for an easy stay — just ask, and our team will take care of it.",
     "services_2": "Airport Transfer",
@@ -95,7 +95,7 @@
     "facilities_1": "Rooms",
     "facilities_2": "Comfortable, air-conditioned rooms with private bathrooms",
     "facilities_3": "Restaurant",
-    "facilities_4": "Roots Café & garden courtyard seating",
+    "facilities_4": "Meals at Cozy Deck Restaurant, shared with Cozy Nest",
     "facilities_5": "Dive Centre Access",
     "facilities_6": "Direct partnership with Cozy Scuba Club",
     "facilities_7": "Common Areas",
@@ -124,5 +124,9 @@
     "label2": "Island tour",
     "label3": "Local restaurants",
     "label4": "Shops & ATM"
+  },
+  "reviews": {
+    "googleUrl": "",
+    "tripadvisorUrl": ""
   }
 }

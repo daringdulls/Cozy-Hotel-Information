@@ -9,3 +9,8 @@
 @media(min-width:1450px){.guest-guide .about-strip>img{height:230px}.guest-guide .photo-card{min-height:340px}.guest-guide .about-strip p{max-width:90ch}.guest-guide .destination img{height:145px}}
 @media(max-width:900px){.guest-guide .guide-width{width:calc(100% - 40px)}}
 @media(max-width:640px){.guest-guide .guide-width{width:calc(100% - 28px)}}
+.review-section[hidden],.review-section [hidden]{display:none!important}
+.review-section h2{font-size:23px;color:var(--green)}
+.review-section p{font-size:14px;color:var(--ink-soft);margin-top:6px}
+.review-section .guide-section-heading{margin-bottom:0}
+.review-actions{display:flex;gap:12px;flex-wrap:wrap}

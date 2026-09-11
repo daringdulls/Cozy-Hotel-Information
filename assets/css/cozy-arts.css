@@ -70,3 +70,7 @@ body[data-property="cozy-arts"] .cozy-logo img{width:52px;height:52px;margin-bot
 body[data-property="cozy-arts"]{--brand-copper:#c45f2d}
 body[data-property="cozy-arts"] .guide-footer:before{background:var(--brand-copper)}
 body[data-property="cozy-arts"] .guide-tile:hover{border-color:var(--brand-copper)}
+body.dining-unavailable [data-restaurant-content]{display:none!important}
+body.dining-unavailable .highlights{grid-template-columns:1fr 1fr}
+body.dining-unavailable .guide-quickmenu{grid-template-columns:repeat(3,1fr)}
+@media(max-width:640px){body.dining-unavailable .highlights{grid-template-columns:1fr}body.dining-unavailable .guide-quickmenu .guide-tile:last-child{grid-column:auto;min-height:94px;flex-direction:column}}

@@ -2,7 +2,7 @@
   var cache = {}, dirty = new Set();
   var scopes = ['site', 'cozy-nest', 'cozy-roots', 'cozy-arts'];
   var titles = {site:'Shared contacts','cozy-nest':'Cozy Nest','cozy-roots':'Cozy Roots','cozy-arts':'Cozy Arts'};
-  var groups = {intro:'Welcome & about your hotel',hours:'Hotel hours',dining:'Restaurant',diving:'Diving',wifi:'Guest Wi-Fi',phones:'Contact numbers',notices:'Guest notices',explore:'Island highlights',photos:'Photo library',gallery:'Gallery title & captions',guestInfo:'Practical guest information',details:'More guest information'};
+  var groups = {reviews:'Guest review links',intro:'Welcome & about your hotel',hours:'Hotel hours',dining:'Restaurant',diving:'Diving',wifi:'Guest Wi-Fi',phones:'Contact numbers',notices:'Guest notices',explore:'Island highlights',photos:'Photo library',gallery:'Gallery title & captions',guestInfo:'Practical guest information',details:'More guest information'};
   function label(key) { return key.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/_/g,' ').replace(/\b\w/g,function (s) { return s.toUpperCase(); }); }
   function api(url, opts) { return fetch(url,Object.assign({credentials:'same-origin'},opts)).then(async function (r) { var body = await r.json(); if (!r.ok) throw new Error(body.error || 'Request failed. Try again.'); return body; }); }
   function el(tag, cls, text) { var node=document.createElement(tag); if(cls) node.className=cls; if(text!==undefined)node.textContent=text; return node; }
@@ -51,10 +51,13 @@
     var heading=el('div','editor-title');heading.append(el('h2','',titles[scope]));
     if(scope!=='site'){var preview=el('a','btn btn-outline-dark btn-sm','Open guest guide ↗');preview.href=scope+'.html';preview.target='_blank';preview.rel='noopener';heading.append(preview);}panel.append(heading);
     if(scope!=='site')panel.append(el('p','editor-intro','Update your guest guide below. Save changes when you are ready for guests to see them.'));
-    Object.entries(data).forEach(function(pair){var key=pair[0],value=pair[1];if(typeof value==='string'){panel.append(makeField(scope,key,value));return;}
+    if(scope==='cozy-roots')panel.append(el('p','editor-intro','Meals are served at Cozy Deck Restaurant, shared with Cozy Nest. Edit its hours, menu link and dining photo in the Cozy Nest tab; both guides use those settings.'));
+    if(scope==='cozy-arts')panel.append(el('p','editor-intro','Restaurant content is currently hidden from the guest guide. Its settings are kept here for future use.'));
+    Object.entries(data).forEach(function(pair){var key=pair[0],value=pair[1];if(scope==='cozy-roots'&&['dining','menuUrl'].includes(key))return;if(typeof value==='string'){panel.append(makeField(scope,key,value));return;}
       var group=el('details','editor-group');group.open=key!=='details';group.append(el('summary','',groups[key]||label(key)));
+      if(key==='reviews')group.append(el('p','editor-intro','Paste the Google review and Tripadvisor links for this property. Each button appears on the guest guide after its link is saved. Leave a link blank to hide that option.'));
       if(key==='photos')group.append(el('p','editor-intro','Replace the sample images with your own property photos. Uploaded photos are saved with your hotel information.'));
-      var grid=el('div',key==='photos'?'photo-grid':'editor-fields');Object.entries(value).forEach(function(entry){if(typeof entry[1]==='string')grid.append(makeField(scope,key+'.'+entry[0],entry[1]));});group.append(grid);panel.append(group);
+      var grid=el('div',key==='photos'?'photo-grid':'editor-fields');Object.entries(value).forEach(function(entry){if(scope==='cozy-roots'&&((key==='photos'&&entry[0]==='dining')||(key==='details'&&(entry[0].startsWith('dining_')||entry[0]==='facilities_4'))))return;if(typeof entry[1]==='string')grid.append(makeField(scope,key+'.'+entry[0],entry[1]));});group.append(grid);panel.append(group);
     });
     var row=el('div','save-row'),button=el('button','btn btn-primary','Save changes'),message=el('span','status-msg');button.dataset.save=scope;message.dataset.status=scope;message.setAttribute('role','status');
     button.addEventListener('click',async function(){var updated=JSON.parse(JSON.stringify(cache[scope]));panel.querySelectorAll('[data-path]').forEach(function(input){set(updated,input.dataset.path,input.value);});button.disabled=true;status(scope,'Saving…');try{await api('/api/content',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({scope:scope,data:updated})});cache[scope]=updated;dirty.delete(scope);status(scope,'Saved. Your guest guide is up to date.');}catch(e){status(scope,e.message,true);}finally{button.disabled=false;}});row.append(button,message);panel.append(row);

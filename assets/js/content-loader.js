@@ -134,6 +134,17 @@
       applyMenuLink(res.data.menuUrl);
       if (sitePhones) applyPhones(sitePhones);
       applyPhotos(res.data.photos);
+      var reviewSection = document.querySelector('.review-section');
+      if (reviewSection) {
+        var count = 0;
+        reviewSection.querySelectorAll('[data-review]').forEach(function (link) {
+          var url = (res.data.reviews || {})[link.dataset.review];
+          link.hidden = !safeUrl(url);
+          if (!link.hidden) { link.href = url; count++; }
+          else link.removeAttribute('href');
+        });
+        reviewSection.hidden = count === 0;
+      }
     });
   }
 

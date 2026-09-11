@@ -147,5 +147,9 @@
     "caption2": "Rooms & spaces",
     "caption3": "Dining at Cozy Nest",
     "caption4": "Underwater adventures"
+  },
+  "reviews": {
+    "googleUrl": "",
+    "tripadvisorUrl": ""
   }
 }
