@@ -1,0 +1,68 @@
+/* Cozy Nest brand palette. Deep Sea follows the written #0F4D46 value
+   and the supplied swatch; the swatch caption lists a conflicting hex. */
+body[data-property="cozy-nest"] {
+  --nest-emerald: #166860;
+  --nest-deep: #0f4d46;
+  --nest-gold: #e0a05c;
+  --nest-shell: #f5f3ed;
+  --nest-mist: #d1ccc5;
+  --nest-charcoal: #1f2a28;
+  --green: var(--nest-emerald);
+  --green-80: var(--nest-deep);
+  --green-10: #e6eeE9;
+  --teal: var(--nest-emerald);
+  --teal-10: #e6eee9;
+  --gold: var(--nest-deep);
+  --cream: var(--nest-shell);
+  --ink: var(--nest-charcoal);
+  --ink-soft: #52635d;
+  --line: var(--nest-mist);
+  background: var(--nest-shell);
+  color: var(--nest-charcoal);
+}
+body[data-property="cozy-nest"] :is(h2,h3,.guide-tile,.guide-button,.about-tags,.service-tiles,.destination,.property-mini) { color: var(--nest-deep); }
+body[data-property="cozy-nest"] :focus-visible { outline-color: var(--nest-gold); }
+body[data-property="cozy-nest"] .welcome-hero { background: var(--nest-deep); }
+body[data-property="cozy-nest"] .hero-shade { background: linear-gradient(90deg,#0f4d46f5,#0f4d46c7 34%,#16686024 71%,#0f4d4620); }
+body[data-property="cozy-nest"] .cozy-logo { background: var(--nest-shell); color: var(--nest-emerald); }
+body[data-property="cozy-nest"] .guide-header .guide-button { background: var(--nest-deep); color: var(--nest-shell); border-color: var(--nest-mist); }
+body[data-property="cozy-nest"] .welcome-eyebrow { color: var(--nest-gold); }
+body[data-property="cozy-nest"] .welcome-copy > p[data-field] { color: var(--nest-shell); }
+body[data-property="cozy-nest"] .phone-button { color: var(--nest-shell); border-color: var(--nest-mist); }
+body[data-property="cozy-nest"] .phone-button:hover { background: var(--nest-deep); }
+body[data-property="cozy-nest"] .whatsapp-button { background: var(--nest-emerald); color: white; border-color: var(--nest-shell); }
+body[data-property="cozy-nest"] .whatsapp-button:hover { background: var(--nest-deep); }
+body[data-property="cozy-nest"] .island-signature { color: var(--nest-shell); }
+body[data-property="cozy-nest"] .surface { background: #fffdf9; }
+body[data-property="cozy-nest"] .guide-tile { background: #ebece4; border-color: #dfded4; }
+body[data-property="cozy-nest"] .guide-tile .icon { color: var(--nest-emerald); }
+body[data-property="cozy-nest"] .guide-tile:hover { background: #e1e8df; border-color: var(--nest-emerald); }
+body[data-property="cozy-nest"] :is(.about-strip p,.heading-label p) { color: var(--ink-soft); }
+body[data-property="cozy-nest"] :is(.hours-card h2 .icon,.heading-label > .icon) { background: var(--nest-emerald); color: var(--nest-shell); }
+body[data-property="cozy-nest"] .hours-card ul { background: var(--nest-shell); }
+body[data-property="cozy-nest"] .hours-card li { border-color: #dedad2; }
+body[data-property="cozy-nest"] .guide-button { border-color: var(--nest-emerald); }
+body[data-property="cozy-nest"] .guide-button:hover { background: #e8eadf; }
+body[data-property="cozy-nest"] .hours-card .guide-button { background: var(--nest-gold); color: var(--nest-charcoal); }
+body[data-property="cozy-nest"] .hours-card .guide-button:hover { background: #eab881; }
+body[data-property="cozy-nest"] .photo-card:after { background: linear-gradient(transparent 6%,#0f4d462e 28%,#0f4d46eb); }
+body[data-property="cozy-nest"] .photo-card h2 { color: var(--nest-shell); }
+body[data-property="cozy-nest"] .photo-card .guide-button { background: var(--nest-shell); color: var(--nest-deep); }
+body[data-property="cozy-nest"] :is(.destination,.service-tiles > a,.property-mini) { background: var(--nest-shell); }
+body[data-property="cozy-nest"] .service-tiles > a:hover { background: #e8eadf; }
+body[data-property="cozy-nest"] .request-note { color: var(--ink-soft); }
+body[data-property="cozy-nest"] .details-heading .eyebrow { color: var(--nest-emerald); }
+body[data-property="cozy-nest"] .guide-detail > summary { color: var(--nest-deep); }
+body[data-property="cozy-nest"] .guide-detail[open] > summary { border-bottom: 2px solid var(--nest-gold); margin-bottom: 14px; }
+body[data-property="cozy-nest"] .guide-footer { background: var(--nest-deep); color: var(--nest-shell); }
+body[data-property="cozy-nest"] .guide-footer:before { background: var(--nest-emerald); }
+body[data-property="cozy-nest"] .guide-footer .cozy-logo { background: transparent; color: var(--nest-shell); }
+body[data-property="cozy-nest"] .footer-script { color: var(--nest-gold); }
+body[data-property="cozy-nest"] .footer-caption { color: var(--nest-mist); border-color: #d1ccc540; }
+body[data-property="cozy-nest"] .guide-drawer { background: var(--nest-shell); color: var(--nest-deep); }
+body[data-property="cozy-nest"] .welcome-actions .guide-button:hover,
+body[data-property="cozy-nest"] .guide-header .guide-button:hover { background: var(--nest-deep); color: var(--nest-shell); }
+body[data-property="cozy-nest"] .welcome-actions .guide-button { border-color: var(--nest-mist); }
+@media(max-width:640px) {
+  body[data-property="cozy-nest"] .hero-shade { background: linear-gradient(90deg,#0f4d46e6,#0f4d4675),linear-gradient(0deg,#0f4d46c7,transparent); }
+}
