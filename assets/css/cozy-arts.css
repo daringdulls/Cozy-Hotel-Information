@@ -1,0 +1,72 @@
+/* Property palette supplied by Cozy Hotels. */
+body[data-property="cozy-arts"] {
+  --brand-emerald: #9c260e;
+  --brand-deep: #9c260e;
+  --brand-gold: #d9a45a;
+  --brand-shell: #e7d7c9;
+  --brand-mist: #d8c2a1;
+  --brand-charcoal: #2b1a18;
+  --green: var(--brand-emerald);
+  --green-80: var(--brand-deep);
+  --green-10: #f3e8df;
+  --teal: var(--brand-emerald);
+  --teal-10: #f3e8df;
+  --gold: var(--brand-deep);
+  --cream: var(--brand-shell);
+  --ink: var(--brand-charcoal);
+  --ink-soft: #65443a;
+  --line: var(--brand-mist);
+  background: var(--brand-shell);
+  color: var(--brand-charcoal);
+}
+body[data-property="cozy-arts"] :is(h2,h3,.guide-tile,.guide-button,.about-tags,.service-tiles,.destination,.property-mini) { color: var(--brand-deep); }
+body[data-property="cozy-arts"] :focus-visible { outline-color: var(--brand-gold); }
+body[data-property="cozy-arts"] .welcome-hero { background: var(--brand-deep); }
+body[data-property="cozy-arts"] .hero-shade { background: linear-gradient(90deg,#9c260ef5,#9c260ec7 34%,#9c260e24 71%,#9c260e20); }
+body[data-property="cozy-arts"] .cozy-logo { background: var(--brand-shell); color: var(--brand-emerald); }
+body[data-property="cozy-arts"] .guide-header .guide-button { background: var(--brand-deep); color: var(--brand-shell); border-color: var(--brand-mist); }
+body[data-property="cozy-arts"] .welcome-eyebrow { color: var(--brand-gold); }
+body[data-property="cozy-arts"] .welcome-copy > p[data-field] { color: var(--brand-shell); }
+body[data-property="cozy-arts"] .phone-button { color: var(--brand-shell); border-color: var(--brand-mist); }
+body[data-property="cozy-arts"] .phone-button:hover { background: var(--brand-deep); }
+body[data-property="cozy-arts"] .whatsapp-button { background: var(--brand-emerald); color: white; border-color: var(--brand-shell); }
+body[data-property="cozy-arts"] .whatsapp-button:hover { background: var(--brand-deep); }
+body[data-property="cozy-arts"] .island-signature { color: var(--brand-shell); }
+body[data-property="cozy-arts"] .surface { background: #fff9f3; }
+body[data-property="cozy-arts"] .guide-tile { background: #f3e8df; border-color: #d8c2a1; }
+body[data-property="cozy-arts"] .guide-tile .icon { color: var(--brand-emerald); }
+body[data-property="cozy-arts"] .guide-tile:hover { background: #ebd6c2; border-color: var(--brand-emerald); }
+body[data-property="cozy-arts"] :is(.about-strip p,.heading-label p) { color: var(--ink-soft); }
+body[data-property="cozy-arts"] :is(.hours-card h2 .icon,.heading-label > .icon) { background: var(--brand-emerald); color: var(--brand-shell); }
+body[data-property="cozy-arts"] .hours-card ul { background: var(--brand-shell); }
+body[data-property="cozy-arts"] .hours-card li { border-color: #d8c2a1; }
+body[data-property="cozy-arts"] .guide-button { border-color: var(--brand-emerald); }
+body[data-property="cozy-arts"] .guide-button:hover { background: #ebd6c2; }
+body[data-property="cozy-arts"] .hours-card .guide-button { background: var(--brand-gold); color: var(--brand-charcoal); }
+body[data-property="cozy-arts"] .hours-card .guide-button:hover { background: #e4b879; }
+body[data-property="cozy-arts"] .photo-card:after { background: linear-gradient(transparent 6%,#9c260e2e 28%,#9c260eeb); }
+body[data-property="cozy-arts"] .photo-card h2 { color: var(--brand-shell); }
+body[data-property="cozy-arts"] .photo-card .guide-button { background: var(--brand-shell); color: var(--brand-deep); }
+body[data-property="cozy-arts"] :is(.destination,.service-tiles > a,.property-mini) { background: var(--brand-shell); }
+body[data-property="cozy-arts"] .service-tiles > a:hover { background: #ebd6c2; }
+body[data-property="cozy-arts"] .request-note { color: var(--ink-soft); }
+body[data-property="cozy-arts"] .details-heading .eyebrow { color: var(--brand-emerald); }
+body[data-property="cozy-arts"] .guide-detail > summary { color: var(--brand-deep); }
+body[data-property="cozy-arts"] .guide-detail[open] > summary { border-bottom: 2px solid var(--brand-gold); margin-bottom: 14px; }
+body[data-property="cozy-arts"] .guide-footer { background: var(--brand-deep); color: var(--brand-shell); }
+body[data-property="cozy-arts"] .guide-footer:before { background: var(--brand-emerald); }
+body[data-property="cozy-arts"] .guide-footer .cozy-logo { background: transparent; color: var(--brand-shell); }
+body[data-property="cozy-arts"] .footer-script { color: var(--brand-gold); }
+body[data-property="cozy-arts"] .footer-caption { color: var(--brand-mist); border-color: #d8c2a140; }
+body[data-property="cozy-arts"] .guide-drawer { background: var(--brand-shell); color: var(--brand-deep); }
+body[data-property="cozy-arts"] .welcome-actions .guide-button:hover,
+body[data-property="cozy-arts"] .guide-header .guide-button:hover { background: var(--brand-deep); color: var(--brand-shell); }
+body[data-property="cozy-arts"] .welcome-actions .guide-button { border-color: var(--brand-mist); }
+@media(max-width:640px) {
+  body[data-property="cozy-arts"] .hero-shade { background: linear-gradient(90deg,#9c260ee6,#9c260e75),linear-gradient(0deg,#9c260ec7,transparent); }
+}
+
+body[data-property="cozy-arts"] .cozy-logo img{width:52px;height:52px;margin-bottom:7px}
+body[data-property="cozy-arts"]{--brand-copper:#c45f2d}
+body[data-property="cozy-arts"] .guide-footer:before{background:var(--brand-copper)}
+body[data-property="cozy-arts"] .guide-tile:hover{border-color:var(--brand-copper)}

@@ -1,0 +1,76 @@
+/* Property palette supplied by Cozy Hotels. */
+body[data-property="cozy-roots"] {
+  --brand-emerald: #be8946;
+  --brand-deep: #7a4c2a;
+  --brand-gold: #b4442a;
+  --brand-shell: #ecddcb;
+  --brand-mist: #d2b18a;
+  --brand-charcoal: #2e1f16;
+  --green: var(--brand-emerald);
+  --green-80: var(--brand-deep);
+  --green-10: #f3e8da;
+  --teal: var(--brand-emerald);
+  --teal-10: #f3e8da;
+  --gold: var(--brand-deep);
+  --cream: var(--brand-shell);
+  --ink: var(--brand-charcoal);
+  --ink-soft: #69513e;
+  --line: var(--brand-mist);
+  background: var(--brand-shell);
+  color: var(--brand-charcoal);
+}
+body[data-property="cozy-roots"] :is(h2,h3,.guide-tile,.guide-button,.about-tags,.service-tiles,.destination,.property-mini) { color: var(--brand-deep); }
+body[data-property="cozy-roots"] :focus-visible { outline-color: var(--brand-gold); }
+body[data-property="cozy-roots"] .welcome-hero { background: var(--brand-deep); }
+body[data-property="cozy-roots"] .hero-shade { background: linear-gradient(90deg,#7a4c2af5,#7a4c2ac7 34%,#be894624 71%,#7a4c2a20); }
+body[data-property="cozy-roots"] .cozy-logo { background: var(--brand-shell); color: var(--brand-emerald); }
+body[data-property="cozy-roots"] .guide-header .guide-button { background: var(--brand-deep); color: var(--brand-shell); border-color: var(--brand-mist); }
+body[data-property="cozy-roots"] .welcome-eyebrow { color: var(--brand-gold); }
+body[data-property="cozy-roots"] .welcome-copy > p[data-field] { color: var(--brand-shell); }
+body[data-property="cozy-roots"] .phone-button { color: var(--brand-shell); border-color: var(--brand-mist); }
+body[data-property="cozy-roots"] .phone-button:hover { background: var(--brand-deep); }
+body[data-property="cozy-roots"] .whatsapp-button { background: var(--brand-emerald); color: white; border-color: var(--brand-shell); }
+body[data-property="cozy-roots"] .whatsapp-button:hover { background: var(--brand-deep); }
+body[data-property="cozy-roots"] .island-signature { color: var(--brand-shell); }
+body[data-property="cozy-roots"] .surface { background: #fffaf3; }
+body[data-property="cozy-roots"] .guide-tile { background: #f3e8da; border-color: #d2b18a; }
+body[data-property="cozy-roots"] .guide-tile .icon { color: var(--brand-emerald); }
+body[data-property="cozy-roots"] .guide-tile:hover { background: #e8d4b8; border-color: var(--brand-emerald); }
+body[data-property="cozy-roots"] :is(.about-strip p,.heading-label p) { color: var(--ink-soft); }
+body[data-property="cozy-roots"] :is(.hours-card h2 .icon,.heading-label > .icon) { background: var(--brand-emerald); color: var(--brand-shell); }
+body[data-property="cozy-roots"] .hours-card ul { background: var(--brand-shell); }
+body[data-property="cozy-roots"] .hours-card li { border-color: #d2b18a; }
+body[data-property="cozy-roots"] .guide-button { border-color: var(--brand-emerald); }
+body[data-property="cozy-roots"] .guide-button:hover { background: #e8d4b8; }
+body[data-property="cozy-roots"] .hours-card .guide-button { background: var(--brand-gold); color: var(--brand-charcoal); }
+body[data-property="cozy-roots"] .hours-card .guide-button:hover { background: #96351f; }
+body[data-property="cozy-roots"] .photo-card:after { background: linear-gradient(transparent 6%,#7a4c2a2e 28%,#7a4c2aeb); }
+body[data-property="cozy-roots"] .photo-card h2 { color: var(--brand-shell); }
+body[data-property="cozy-roots"] .photo-card .guide-button { background: var(--brand-shell); color: var(--brand-deep); }
+body[data-property="cozy-roots"] :is(.destination,.service-tiles > a,.property-mini) { background: var(--brand-shell); }
+body[data-property="cozy-roots"] .service-tiles > a:hover { background: #e8d4b8; }
+body[data-property="cozy-roots"] .request-note { color: var(--ink-soft); }
+body[data-property="cozy-roots"] .details-heading .eyebrow { color: var(--brand-emerald); }
+body[data-property="cozy-roots"] .guide-detail > summary { color: var(--brand-deep); }
+body[data-property="cozy-roots"] .guide-detail[open] > summary { border-bottom: 2px solid var(--brand-gold); margin-bottom: 14px; }
+body[data-property="cozy-roots"] .guide-footer { background: var(--brand-deep); color: var(--brand-shell); }
+body[data-property="cozy-roots"] .guide-footer:before { background: var(--brand-emerald); }
+body[data-property="cozy-roots"] .guide-footer .cozy-logo { background: transparent; color: var(--brand-shell); }
+body[data-property="cozy-roots"] .footer-script { color: var(--brand-gold); }
+body[data-property="cozy-roots"] .footer-caption { color: var(--brand-mist); border-color: #d2b18a40; }
+body[data-property="cozy-roots"] .guide-drawer { background: var(--brand-shell); color: var(--brand-deep); }
+body[data-property="cozy-roots"] .welcome-actions .guide-button:hover,
+body[data-property="cozy-roots"] .guide-header .guide-button:hover { background: var(--brand-deep); color: var(--brand-shell); }
+body[data-property="cozy-roots"] .welcome-actions .guide-button { border-color: var(--brand-mist); }
+@media(max-width:640px) {
+  body[data-property="cozy-roots"] .hero-shade { background: linear-gradient(90deg,#7a4c2ae6,#7a4c2a75),linear-gradient(0deg,#7a4c2ac7,transparent); }
+}
+
+body[data-property="cozy-roots"] .cozy-logo img{width:52px;height:52px;margin-bottom:7px}
+body[data-property="cozy-roots"] .hours-card .guide-button{color:#fffaf3}
+body[data-property="cozy-roots"] .whatsapp-button{background:#7a4c2a}
+body[data-property="cozy-roots"] .guide-tile .icon{color:#7a4c2a}
+body[data-property="cozy-roots"] :is(.hours-card h2 .icon,.heading-label>.icon){color:#2e1f16}
+body[data-property="cozy-roots"] :is(.welcome-eyebrow,.footer-script){color:#ecddcb}
+
+body[data-property="cozy-roots"] .guide-header .cozy-logo{color:#7a4c2a}
