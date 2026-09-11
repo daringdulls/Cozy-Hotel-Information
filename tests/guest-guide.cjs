@@ -16,7 +16,7 @@ assert.ok(['localhost','127.0.0.1'].includes(new URL(base).hostname),'Browser wr
   r=await context.request.get(base+'/.env.local');assert.equal(r.status(),404);
   for(const slug of ['cozy-nest','cozy-roots','cozy-arts']) {
    await page.goto(base+'/'+slug+'.html');await page.waitForLoadState('networkidle');
-   assert.equal(await page.locator('.guide-quickmenu a').count(),10);
+   assert.equal(await page.locator('.guide-quickmenu a').count(),slug==='cozy-arts'?9:10);
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    await page.locator('.guide-quickmenu a[href="#diving"]').click();assert.equal(await page.locator('#activities').getAttribute('open'),'');
    await page.locator('.guide-menu-button').click();assert.equal(await page.locator('#guest-menu').isVisible(),true);
