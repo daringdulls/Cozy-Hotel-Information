@@ -66,3 +66,27 @@ body[data-property="cozy-nest"] .welcome-actions .guide-button { border-color: v
 @media(max-width:640px) {
   body[data-property="cozy-nest"] .hero-shade { background: linear-gradient(90deg,#0f4d46e6,#0f4d4675),linear-gradient(0deg,#0f4d46c7,transparent); }
 }
+body[data-property="cozy-nest"] .nest-official-logo {
+  width: 156px;
+  padding: 14px 22px 18px;
+  background: var(--nest-shell);
+}
+body[data-property="cozy-nest"] .nest-official-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+body[data-property="cozy-nest"] .guide-footer .nest-official-logo {
+  width: 156px;
+  background: var(--nest-shell);
+  border-radius: 16px;
+  padding: 18px 22px;
+}
+@media(max-width:640px) {
+  body[data-property="cozy-nest"] .guide-header .nest-official-logo {
+    width: 124px;
+    padding: 12px 18px 16px;
+  }
+  body[data-property="cozy-nest"] .guide-footer .nest-official-logo { width: 138px; }
+}
