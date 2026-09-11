@@ -33,7 +33,11 @@
     "lake": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=500&q=80",
     "island": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=500&q=80",
     "food": "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=500&q=80",
-    "shops": "https://images.unsplash.com/photo-1473181488821-2d23949a045a?auto=format&fit=crop&w=500&q=80"
+    "shops": "https://images.unsplash.com/photo-1473181488821-2d23949a045a?auto=format&fit=crop&w=500&q=80",
+    "gallery1": "",
+    "gallery2": "",
+    "gallery3": "",
+    "gallery4": ""
   },
   "intro": {
     "title": "Cozy Nest",
@@ -124,5 +128,24 @@
     "label2": "Island tour",
     "label3": "Local restaurants",
     "label4": "Shops & ATM"
+  },
+  "guestInfo": {
+    "currency": "The local currency is the Maldivian rufiyaa (MVR). Guest payments at our hotel are handled in US dollars. Please contact reception with any currency questions.",
+    "localTime": "Maldives time is GMT+5 (UTC+5) throughout the year, with no daylight saving time. Fuvahmulah follows the same time as the capital, Malé.",
+    "payment": "Payments are handled between 21:00 and 22:00. We accept Mastercard, Visa, American Express and UnionPay credit/debit cards, bank transfers and online payments.",
+    "roomKey": "Please keep your room key in a safe place. Lost or damaged keys are charged to your account at US$65. Return your key to reception 15 minutes before departure.",
+    "clothing": "Casual clothing is welcome. Please respect local customs when exploring inhabited islands by covering your shoulders and thighs. Swimwear is not permitted in the restaurant, bar or office areas; a T-shirt and shorts are recommended.",
+    "laundry": "Laundry service is available. Please contact your room attendant or reception for assistance.",
+    "scubaSchool": "Contact Cozy Scuba Club for diving courses, availability and bookings. Reception can help you get in touch with the team.",
+    "excursions": "Explore the Maldives with island hopping, night fishing, a sunset cruise or deep-sea fishing. Ask reception about available excursions and arrangements.",
+    "propertyDamage": "Damage to hotel property or missing items will be charged to your account according to their value in US dollars.",
+    "tips": "Tipping is customary in the Maldives. If you would like to thank a particular staff member, we recommend giving your tip directly to them."
+  },
+  "gallery": {
+    "title": "A little look around",
+    "caption1": "Your island stay",
+    "caption2": "Rooms & spaces",
+    "caption3": "Dining at Cozy Nest",
+    "caption4": "Underwater adventures"
   }
 }

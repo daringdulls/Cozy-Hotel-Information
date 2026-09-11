@@ -23,6 +23,18 @@ assert.ok(['localhost','127.0.0.1'].includes(new URL(base).hostname),'Browser wr
    await page.keyboard.press('Escape');assert.equal(await page.locator('#guest-menu').isVisible(),false);
    await page.goto(base+'/'+slug+'.html');await page.waitForLoadState('networkidle');
    if(slug==='cozy-nest') {
+    await page.setViewportSize({width:1900,height:1000});
+    assert.ok((await page.locator('main.guide-width').boundingBox()).width>=1600,'Desktop guide should use the available width');
+    assert.equal(await page.locator('.gallery-photo').count(),4);
+    await page.locator('.gallery-photo').first().click();
+    assert.equal(await page.locator('.gallery-dialog').evaluate(d=>d.open),true);
+    assert.equal(await page.locator('.gallery-count').textContent(),'1 / 4');
+    await page.keyboard.press('ArrowLeft');assert.equal(await page.locator('.gallery-count').textContent(),'4 / 4');
+    await page.keyboard.press('ArrowRight');assert.equal(await page.locator('.gallery-count').textContent(),'1 / 4');
+    await page.keyboard.press('Escape');assert.equal(await page.locator('.gallery-dialog').evaluate(d=>d.open),false);
+    assert.equal(await page.locator('.gallery-photo').first().evaluate(e=>e===document.activeElement),true);
+    await page.locator('#money-time summary').click();assert.ok((await page.locator('[data-field="guestInfo.localTime"]').textContent()).includes('GMT+5'));
+    await page.locator('#money-time summary').click();
     fs.mkdirSync(path.join(root,'artifacts'),{recursive:true});
     await page.screenshot({path:path.join(root,'artifacts/guest-desktop.png'),fullPage:true});
     console.log('Photo results:',await page.locator('main img,.hero-photo').evaluateAll(imgs=>imgs.map(x=>({photo:x.dataset.photo||x.dataset.propertyPhoto,loaded:x.complete&&x.naturalWidth>0}))));
@@ -39,12 +51,19 @@ assert.ok(['localhost','127.0.0.1'].includes(new URL(base).hostname),'Browser wr
   await page.locator('#password').fill(process.env.ADMIN_PASSWORD||'cozy-preview-only');await page.locator('#login-form button').click();
   await page.locator('[data-save="cozy-nest"]').waitFor({state:'attached'});await page.locator('.tab-btn[data-scope="cozy-nest"]').click();
   await page.locator('#cozy-nest-intro-title').fill('Cozy upload test');
+  await page.locator('#cozy-nest-gallery-caption1').fill('Gallery upload check');
+  await page.locator('#cozy-nest-guestInfo-laundry').fill('Ask reception for laundry assistance.');
+  await page.locator('#cozy-nest-photos-gallery1-file').setInputFiles(path.join(root,'assets/images/cozy-nest-primary-logo.png'));
+  await page.waitForFunction(()=>document.querySelector('#cozy-nest-photos-gallery1').value.startsWith('data:image/'));
   await page.locator('#cozy-nest-photos-hero-file').setInputFiles(path.join(root,'artifacts/guest-mobile.png'));
   await page.waitForFunction(()=>document.querySelector('#cozy-nest-photos-hero').value.startsWith('data:image/'));
   await page.locator('[data-save="cozy-nest"]').click();await page.waitForFunction(()=>document.querySelector('[data-status="cozy-nest"]').textContent.startsWith('Saved.'));
   await page.screenshot({path:path.join(root,'artifacts/admin-desktop.png'),fullPage:true});
   r=await context.request.get(base+'/api/content?scope=cozy-nest');let saved=await r.json();assert.equal(saved.data.intro.title,'Cozy upload test');assert.ok(saved.data.photos.hero.startsWith('data:image/webp;base64,'));
   await page.goto(base+'/cozy-nest.html');await page.waitForLoadState('networkidle');assert.equal(await page.locator('h1 [data-field="intro.title"]').textContent(),'Cozy upload test');assert.ok((await page.locator('.hero-photo').getAttribute('src')).startsWith('data:image/webp;base64,'));
+  assert.equal(await page.locator('[data-field="gallery.caption1"]').textContent(),'Gallery upload check');
+  assert.ok((await page.locator('[data-photo="gallery1"]').getAttribute('src')).startsWith('data:image/webp;base64,'));
+  assert.equal(await page.locator('[data-field="guestInfo.laundry"]').textContent(),'Ask reception for laundry assistance.');
   r=await context.request.put(base+'/api/content',{data:{scope:'cozy-nest',data:{menuUrl:'javascript:alert(1)'}}});assert.equal(r.status(),400);
   r=await context.request.post(base+'/api/logout');assert.equal(r.status(),200);
   r=await context.request.put(base+'/api/content',{data:{scope:'cozy-nest',data:{}}});assert.equal(r.status(),401);

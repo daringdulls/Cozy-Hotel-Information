@@ -88,7 +88,7 @@
   function applyPhotos(photos) {
     if (!photos) return;
     document.querySelectorAll('img[data-photo]').forEach(function (el) {
-      var url = photos[el.dataset.photo];
+      var url = photos[el.dataset.photo] || photos[el.dataset.fallbackPhoto];
       if (safeUrl(url, true)) el.src = url;
     });
     var map = { hero: 'hero-section', about: 'ph-about', dining: 'ph-dining', transfers: 'ph-transfers' };

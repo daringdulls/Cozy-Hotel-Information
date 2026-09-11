@@ -21,7 +21,7 @@ The guides use a teal, photo-led layout with ten navigation tiles, opening hours
 
 The initial photographs are sample Unsplash images, not verified photographs of these properties or island locations. Replace them with approved hotel photography before a public launch.
 
-Saved text and compressed photos persist together in Neon Postgres. No image-storage subscription is required for this small fixed photo library. Each uploaded photo is limited to 280,000 data-URL characters in the editor; a content document is capped at 3.5 MB. For a large gallery, use dedicated object storage instead.
+Saved text and compressed photos persist together in Neon Postgres. No image-storage subscription is required for this small fixed photo library. New photo uploads are limited to 220,000 data-URL characters (150,000 for gallery photos); a content document is capped at 3.5 MB. For a large gallery, use dedicated object storage instead.
 
 Requests open WhatsApp with a prepared message; they do not send automatically. If no restaurant menu URL is configured, the menu button opens a request to the restaurant. Shared contact edits also update these links.
 
@@ -56,3 +56,9 @@ Alternatively, `npm run dev` runs Vercel's local environment. Never commit `.env
 - `node tests/guest-guide.cjs` — browser integration checks against a running local preview. Requires Playwright accessible to Node and Microsoft Edge. `TEST_URL` and `ADMIN_PASSWORD` can override the local test target/credentials. The test temporarily edits the local Cozy Nest seed and restores it afterward; use only a local preview with file storage.
 
 Browser coverage includes three properties at desktop/mobile sizes, disclosures and keyboard navigation, hotel hub, rejected sign-in, authenticated editing, image upload, save/reload, unsafe URL rejection, and logout.
+
+## Cozy Nest gallery and practical information
+
+The guest layout expands up to 1,680 px on wide screens. Cozy Nest includes four gallery slots with a keyboard-accessible full-size viewer. In the editor, use **Photo library → Gallery1–Gallery4** to upload gallery images, and **Gallery title & captions** to edit their captions. Empty gallery slots reuse the current hero, about, dining and diving images.
+
+**Practical guest information** contains currency, time, payments, room keys, clothing, laundry, diving school, excursions, property damage and tips. New fields are merged with saved database content; no existing records or photos need to be replaced.

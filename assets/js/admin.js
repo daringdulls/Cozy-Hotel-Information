@@ -2,7 +2,7 @@
   var cache = {}, dirty = new Set();
   var scopes = ['site', 'cozy-nest', 'cozy-roots', 'cozy-arts'];
   var titles = {site:'Shared contacts','cozy-nest':'Cozy Nest','cozy-roots':'Cozy Roots','cozy-arts':'Cozy Arts'};
-  var groups = {intro:'Welcome & about your hotel',hours:'Hotel hours',dining:'Restaurant',diving:'Diving',wifi:'Guest Wi-Fi',phones:'Contact numbers',notices:'Guest notices',explore:'Island highlights',photos:'Photo library',details:'More guest information'};
+  var groups = {intro:'Welcome & about your hotel',hours:'Hotel hours',dining:'Restaurant',diving:'Diving',wifi:'Guest Wi-Fi',phones:'Contact numbers',notices:'Guest notices',explore:'Island highlights',photos:'Photo library',gallery:'Gallery title & captions',guestInfo:'Practical guest information',details:'More guest information'};
   function label(key) { return key.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/_/g,' ').replace(/\b\w/g,function (s) { return s.toUpperCase(); }); }
   function api(url, opts) { return fetch(url,Object.assign({credentials:'same-origin'},opts)).then(async function (r) { var body = await r.json(); if (!r.ok) throw new Error(body.error || 'Request failed. Try again.'); return body; }); }
   function el(tag, cls, text) { var node=document.createElement(tag); if(cls) node.className=cls; if(text!==undefined)node.textContent=text; return node; }
@@ -14,21 +14,25 @@
     image.src=value || ''; image.hidden=!value;
     image.onerror=function(){image.hidden=true;};input.value=value || '';
   }
-  async function preparePhoto(file) {
+  async function preparePhoto(file, limit) {
+    limit = limit || 220000;
     if(!['image/jpeg','image/png','image/webp'].includes(file.type)) throw new Error('Choose a JPG, PNG or WebP photo.');
     if(file.size>20000000) throw new Error('Choose a photo smaller than 20 MB.');
     var bitmap=await createImageBitmap(file), scale=Math.min(1,1400/Math.max(bitmap.width,bitmap.height));
     var canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));
     canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();
     var quality=.85,result;
-    do {result=canvas.toDataURL('image/webp',quality);quality-=.1;} while(result.length>280000 && quality>.25);
-    if(result.length>280000) throw new Error('This photo has too much detail. Choose a smaller image.');return result;
+    do {result=canvas.toDataURL('image/webp',quality);quality-=.1;} while(result.length>limit && quality>.25);
+    if(result.length>limit) {
+      var small=document.createElement('canvas');small.width=Math.round(canvas.width*.7);small.height=Math.round(canvas.height*.7);small.getContext('2d').drawImage(canvas,0,0,small.width,small.height);result=small.toDataURL('image/webp',.65);
+    }
+    if(result.length>limit) throw new Error('This photo has too much detail. Choose a smaller image.');return result;
   }
   function makeField(scope,path,value) {
     var field=el('div','field'),id=scope+'-'+path.replaceAll('.','-');
     var fieldLabel=path.startsWith('details.') ? label(path.split('.')[1].replace(/_\d+$/, ''))+' — '+value.slice(0,65)+(value.length>65?'…':'') : label(path.split('.').pop());
     var caption=el('label','',fieldLabel);caption.htmlFor=id;field.append(caption);
-    var photo=path.startsWith('photos.'),long=value.length>100 || /description|welcome|about|notices|details/.test(path);
+    var photo=path.startsWith('photos.'),long=path.startsWith('guestInfo.')||value.length>100 || /description|welcome|about|notices|details/.test(path);
     var input=el(long&&!photo?'textarea':'input');input.id=id;input.dataset.path=path;input.value=value;
     if(input.tagName==='TEXTAREA')input.rows=3;
     if(photo){input.type='text';input.placeholder='Paste an image URL or upload a photo';input.className='photo-url';}
@@ -37,9 +41,9 @@
       photoPreview(field,input,value);
       var upload=el('input');upload.type='file';upload.accept='image/jpeg,image/png,image/webp';upload.id=id+'-file';upload.className='photo-file';
       var uploadLabel=el('label','upload-label','Choose photo');uploadLabel.htmlFor=upload.id;
-      var note=el('p','photo-help','JPG, PNG or WebP · automatically resized');
-      upload.addEventListener('change',async function(){if(!upload.files[0])return;note.textContent='Preparing photo…';var save=document.querySelector('[data-save="'+scope+'"]');save.disabled=true;try{var data=await preparePhoto(upload.files[0]);photoPreview(field,input,data);dirty.add(scope);note.textContent='Photo ready. Save changes to publish it.';}catch(e){note.textContent=e.message;}finally{save.disabled=false;upload.value='';}});
-      var reset=el('button','photo-reset','Use default photo');reset.type='button';reset.addEventListener('click',function(){photoPreview(field,input,'');dirty.add(scope);note.textContent='Default photo will appear after saving.';});field.append(uploadLabel,upload,reset,note);
+      var note=el('p','photo-help',path.startsWith('photos.gallery')?'Optional gallery photo. Leave blank to use the corresponding hotel photo.':'JPG, PNG or WebP · automatically resized');
+      upload.addEventListener('change',async function(){if(!upload.files[0])return;note.textContent='Preparing photo…';var save=document.querySelector('[data-save="'+scope+'"]');save.disabled=true;try{var data=await preparePhoto(upload.files[0],path.startsWith('photos.gallery')?150000:220000);photoPreview(field,input,data);dirty.add(scope);note.textContent='Photo ready. Save changes to publish it.';}catch(e){note.textContent=e.message;}finally{save.disabled=false;upload.value='';}});
+      var reset=el('button','photo-reset',path.startsWith('photos.gallery')?'Use existing hotel photo':'Use default photo');reset.type='button';reset.addEventListener('click',function(){photoPreview(field,input,'');dirty.add(scope);note.textContent='Default photo will appear after saving.';});field.append(uploadLabel,upload,reset,note);
     }return field;
   }
   function render(scope,data){
