@@ -4,6 +4,8 @@
    ========================================================================== */
 
 :root{
+  /* Keep the approved light palette when browsers offer automatic darkening. */
+  color-scheme: only light;
   /* Brand colors */
   --green:        #093B16;
   --green-80:     #2C5A38;
