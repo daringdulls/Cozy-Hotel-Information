@@ -111,6 +111,7 @@
     applyMenuLink('');
     fetchJson('/api/content?scope=site').then(function (res) {
       if (res && res.data) {
+        if(document.body.classList.contains('hotel-hub')){applyFields(res.data);applyPhotos(res.data.photos);}
         sitePhones = res.data.phones;
         applyPhones(res.data.phones);
         applyInstagram(res.data.instagram);
@@ -137,13 +138,15 @@
       var reviewSection = document.querySelector('.review-section');
       if (reviewSection) {
         var count = 0;
-        reviewSection.querySelectorAll('[data-review]').forEach(function (link) {
+        document.querySelectorAll('[data-review]').forEach(function (link) {
           var url = (res.data.reviews || {})[link.dataset.review];
           link.hidden = !safeUrl(url);
           if (!link.hidden) { link.href = url; count++; }
           else link.removeAttribute('href');
         });
         reviewSection.hidden = count === 0;
+        var floating = document.querySelector('.floating-reviews');
+        if(floating) floating.hidden = count === 0;
       }
     });
   }

@@ -1,8 +1,8 @@
 (function () {
   var cache = {}, dirty = new Set();
   var scopes = ['site', 'cozy-nest', 'cozy-roots', 'cozy-arts'];
-  var titles = {site:'Shared contacts','cozy-nest':'Cozy Nest','cozy-roots':'Cozy Roots','cozy-arts':'Cozy Arts'};
-  var groups = {reviews:'Guest review links',intro:'Welcome & about your hotel',hours:'Hotel hours',dining:'Restaurant',diving:'Diving',wifi:'Guest Wi-Fi',phones:'Contact numbers',notices:'Guest notices',explore:'Island highlights',photos:'Photo library',gallery:'Gallery title & captions',guestInfo:'Practical guest information',details:'More guest information'};
+  var titles = {site:'Our hotels page & contacts','cozy-nest':'Cozy Nest','cozy-roots':'Cozy Roots','cozy-arts':'Cozy Art'};
+  var groups = {homepage:'Our hotels page — welcome text',reviews:'Guest review links',intro:'Welcome & about your hotel',hours:'Hotel hours',dining:'Restaurant',diving:'Diving',wifi:'Guest Wi-Fi',phones:'Contact numbers',notices:'Guest notices',explore:'Island highlights',photos:'Photo library',gallery:'Gallery title & captions',guestInfo:'Practical guest information',details:'More guest information'};
   function label(key) { return key.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/_/g,' ').replace(/\b\w/g,function (s) { return s.toUpperCase(); }); }
   function api(url, opts) { return fetch(url,Object.assign({credentials:'same-origin'},opts)).then(async function (r) { var body = await r.json(); if (!r.ok) throw new Error(body.error || 'Request failed. Try again.'); return body; }); }
   function el(tag, cls, text) { var node=document.createElement(tag); if(cls) node.className=cls; if(text!==undefined)node.textContent=text; return node; }
@@ -53,6 +53,8 @@
     var panel=document.querySelector('[data-panel="'+scope+'"]');panel.replaceChildren();
     var heading=el('div','editor-title');heading.append(el('h2','',titles[scope]));
     if(scope!=='site'){var preview=el('a','btn btn-outline-dark btn-sm','Open guest guide ↗');preview.href=scope+'.html';preview.target='_blank';preview.rel='noopener';heading.append(preview);}panel.append(heading);
+    if(scope==='site')panel.append(el('p','editor-intro','Edit the Our hotels landing page here. In Photo library, Logo controls the header and footer logo; Hero controls the large welcome photo. Leave either blank to use the default image.'));
+    if(scope==='site'){var reviewHelp=el('div','editor-group');reviewHelp.append(el('h2','','Google & Tripadvisor reviews'),el('p','editor-intro','Choose a property to edit its review links.'));['cozy-nest','cozy-roots','cozy-arts'].forEach(function(slug){var jump=el('button','btn btn-outline-dark btn-sm',titles[slug]+' reviews');jump.type='button';jump.addEventListener('click',function(){document.querySelector('[data-scope="'+slug+'"]').click();document.querySelector('[data-panel="'+slug+'"]').scrollIntoView({block:'start'});});reviewHelp.append(jump);});panel.append(reviewHelp);}
     if(scope!=='site')panel.append(el('p','editor-intro','Update your guest guide below. Save changes when you are ready for guests to see them.'));
     if(scope==='cozy-roots')panel.append(el('p','editor-intro','Meals are served at Cozy Deck Restaurant, shared with Cozy Nest. Edit its hours, menu link and dining photo in the Cozy Nest tab; both guides use those settings.'));
     var entries=Object.entries(data);

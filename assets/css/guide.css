@@ -14,3 +14,13 @@
 .review-section p{font-size:14px;color:var(--ink-soft);margin-top:6px}
 .review-section .guide-section-heading{margin-bottom:0}
 .review-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+.floating-reviews{position:fixed;right:20px;bottom:max(20px,env(safe-area-inset-bottom));z-index:40;color:var(--ink);font-size:14px}
+.floating-reviews[hidden]{display:none}
+.floating-reviews>summary{list-style:none;cursor:pointer;background:var(--green);color:#fff;border:2px solid #fff;border-radius:30px;padding:13px 20px;font-weight:700;box-shadow:0 4px 20px #0003}
+.floating-reviews>summary::-webkit-details-marker{display:none}
+.floating-review-panel{position:absolute;bottom:60px;right:0;width:min(290px,calc(100vw - 32px));background:#fff;border:1px solid #ddd;border-radius:16px;padding:20px;box-shadow:0 8px 30px #0003}
+.floating-review-panel p{margin:8px 0 14px;color:#48566b}
+.floating-review-panel a{display:block;padding:12px;margin-top:8px;border:1px solid currentColor;border-radius:8px;color:var(--green);font-weight:600}
+.floating-review-panel a[hidden]{display:none}
+@media print{.floating-reviews{display:none}}

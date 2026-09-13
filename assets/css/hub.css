@@ -2,3 +2,28 @@
 
 .hotel-hub .prop-card[href="cozy-roots.html"]{border-bottom:5px solid #be8946}.hotel-hub .prop-card[href="cozy-roots.html"] :is(h3,.eyebrow){color:#7a4c2a}.hotel-hub .prop-card[href="cozy-roots.html"] .btn{background:#7a4c2a}
 .hotel-hub .prop-card[href="cozy-arts.html"]{border-bottom:5px solid #c45f2d}.hotel-hub .prop-card[href="cozy-arts.html"] :is(h3,.eyebrow){color:#9c260e}.hotel-hub .prop-card[href="cozy-arts.html"] .btn{background:#9c260e}
+
+.hotel-hub{background:#f5f3ed;--green:#166860;--ink:#1f2a28}
+.hotel-hub .container{max-width:1440px}
+.hotel-hub .guide-header{background:#f5f3ed;padding:12px max(24px,calc((100% - 1392px)/2));align-items:center}
+.hotel-hub .hub-official-logo{background:#fff;border-radius:10px;width:150px;padding:12px 18px}
+.hotel-hub .hub-official-logo img{display:block;width:100%;height:82px;object-fit:contain}
+.hotel-hub .guide-header-actions{padding:0}
+.hotel-hub .hub-hero{position:relative;isolation:isolate;min-height:540px;display:flex;align-items:center;background:#0f4d46;padding:80px 0}
+.hub-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.hotel-hub .hub-hero:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#0f302deb,#0f302d65 65%,#0f302d15)}
+.hotel-hub .hub-hero h1{max-width:760px;font-size:clamp(44px,6.5vw,86px);line-height:1.04;letter-spacing:-2px}
+.hotel-hub .hub-hero p{max-width:570px;font-size:18px;line-height:1.6}
+.hotel-hub .hub-hero .eyebrow{font-size:12px;letter-spacing:3px;color:#e0a05c;margin-bottom:20px}
+.hub-choose{display:inline-flex;margin-top:28px;background:#f5f3ed;color:#0f4d46;padding:15px 24px;border-radius:30px;font-weight:700}
+.hotel-hub .props-grid{gap:24px}
+.hotel-hub .prop-card{display:flex;flex-direction:column;border-radius:18px;border-bottom:5px solid #166860;transition:transform .2s}
+.hotel-hub .prop-card:hover{transform:translateY(-4px)}
+.hotel-hub .prop-card>img{height:290px}
+.hotel-hub .prop-card-body{display:flex;flex-direction:column;flex:1;padding:28px}
+.hotel-hub .prop-card-body .btn{align-self:flex-start;margin-top:auto}
+.hotel-hub .prop-card-body>p:not(.eyebrow){margin-bottom:24px}
+.hotel-hub #properties{scroll-margin-top:24px}
+.hotel-hub .guide-footer .hub-official-logo{background:white;color:#1f2a28}
+@media(max-width:640px){.hotel-hub .hub-hero{min-height:480px;padding:60px 0}.hotel-hub .hub-hero h1{letter-spacing:-1px}.hotel-hub .hub-hero p{font-size:16px}.hotel-hub .hub-official-logo{width:118px}.hotel-hub .hub-official-logo img{height:65px}.hotel-hub .prop-card>img{height:230px}}
+@media(prefers-reduced-motion:reduce){.hotel-hub .prop-card{transition:none}}
