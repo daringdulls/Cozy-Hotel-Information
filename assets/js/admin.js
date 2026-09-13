@@ -31,10 +31,13 @@
   function makeField(scope,path,value) {
     var field=el('div','field'),id=scope+'-'+path.replaceAll('.','-');
     var fieldLabel=path.startsWith('details.') ? label(path.split('.')[1].replace(/_\d+$/, ''))+' — '+value.slice(0,65)+(value.length>65?'…':'') : label(path.split('.').pop());
+    if(path==='reviews.googleUrl')fieldLabel='Google review link';
+    if(path==='reviews.tripadvisorUrl')fieldLabel='Tripadvisor review link';
     var caption=el('label','',fieldLabel);caption.htmlFor=id;field.append(caption);
     var photo=path.startsWith('photos.'),long=path.startsWith('guestInfo.')||value.length>100 || /description|welcome|about|notices|details/.test(path);
     var input=el(long&&!photo?'textarea':'input');input.id=id;input.dataset.path=path;input.value=value;
     if(input.tagName==='TEXTAREA')input.rows=3;
+    if(path.startsWith('reviews.')){input.placeholder='Paste the property review link (https://...)';}
     if(photo){input.type='text';input.placeholder='Paste an image URL or upload a photo';input.className='photo-url';}
     input.addEventListener('input',function(){dirty.add(scope);if(photo)photoPreview(field,input,input.value);});field.append(input);
     if(photo){
@@ -52,7 +55,9 @@
     if(scope!=='site'){var preview=el('a','btn btn-outline-dark btn-sm','Open guest guide ↗');preview.href=scope+'.html';preview.target='_blank';preview.rel='noopener';heading.append(preview);}panel.append(heading);
     if(scope!=='site')panel.append(el('p','editor-intro','Update your guest guide below. Save changes when you are ready for guests to see them.'));
     if(scope==='cozy-roots')panel.append(el('p','editor-intro','Meals are served at Cozy Deck Restaurant, shared with Cozy Nest. Edit its hours, menu link and dining photo in the Cozy Nest tab; both guides use those settings.'));
-    Object.entries(data).forEach(function(pair){var key=pair[0],value=pair[1];if(['cozy-roots','cozy-arts'].includes(scope)&&['dining','menuUrl'].includes(key))return;if(typeof value==='string'){panel.append(makeField(scope,key,value));return;}
+    var entries=Object.entries(data);
+    if(scope!=='site'){entries=entries.filter(function(pair){return pair[0]!=='reviews';});entries.unshift(['reviews',Object.assign({googleUrl:'',tripadvisorUrl:''},data.reviews||{})]);}
+    entries.forEach(function(pair){var key=pair[0],value=pair[1];if(['cozy-roots','cozy-arts'].includes(scope)&&['dining','menuUrl'].includes(key))return;if(typeof value==='string'){panel.append(makeField(scope,key,value));return;}
       var group=el('details','editor-group');group.open=key!=='details';group.append(el('summary','',groups[key]||label(key)));
       if(key==='reviews')group.append(el('p','editor-intro','Paste the Google review and Tripadvisor links for this property. Each button appears on the guest guide after its link is saved. Leave a link blank to hide that option.'));
       if(key==='photos')group.append(el('p','editor-intro','Replace the sample images with your own property photos. Uploaded photos are saved with your hotel information.'));
