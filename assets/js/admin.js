@@ -31,6 +31,7 @@
   function makeField(scope,path,value) {
     var field=el('div','field'),id=scope+'-'+path.replaceAll('.','-');
     var fieldLabel=path.startsWith('details.') ? label(path.split('.')[1].replace(/_\d+$/, ''))+' — '+value.slice(0,65)+(value.length>65?'…':'') : label(path.split('.').pop());
+    if(scope==='site'&&path.startsWith('photos.'))fieldLabel=({'photos.logo':'Our hotels page — header & footer logo','photos.hero':'Our hotels page — large hero image','photos.nestCard':'Cozy Nest card image','photos.rootsCard':'Cozy Roots card image','photos.artCard':'Cozy Art card image'})[path]||fieldLabel;
     if(path==='reviews.googleUrl')fieldLabel='Google review link';
     if(path==='reviews.tripadvisorUrl')fieldLabel='Tripadvisor review link';
     var caption=el('label','',fieldLabel);caption.htmlFor=id;field.append(caption);
@@ -53,7 +54,7 @@
     var panel=document.querySelector('[data-panel="'+scope+'"]');panel.replaceChildren();
     var heading=el('div','editor-title');heading.append(el('h2','',titles[scope]));
     if(scope!=='site'){var preview=el('a','btn btn-outline-dark btn-sm','Open guest guide ↗');preview.href=scope+'.html';preview.target='_blank';preview.rel='noopener';heading.append(preview);}panel.append(heading);
-    if(scope==='site')panel.append(el('p','editor-intro','Edit the Our hotels landing page here. In Photo library, Logo controls the header and footer logo; Hero controls the large welcome photo. Leave either blank to use the default image.'));
+    if(scope==='site')panel.append(el('p','editor-intro','Edit the Our hotels landing page here. In Photo library, Logo controls the header and footer logo; Hero controls the large welcome photo. The three card image fields change the hotel pictures on this page only. Leave them blank to use each hotel’s About photo.'));
     if(scope==='site'){var reviewHelp=el('div','editor-group');reviewHelp.append(el('h2','','Google & Tripadvisor reviews'),el('p','editor-intro','Choose a property to edit its review links.'));['cozy-nest','cozy-roots','cozy-arts'].forEach(function(slug){var jump=el('button','btn btn-outline-dark btn-sm',titles[slug]+' reviews');jump.type='button';jump.addEventListener('click',function(){document.querySelector('[data-scope="'+slug+'"]').click();document.querySelector('[data-panel="'+slug+'"]').scrollIntoView({block:'start'});});reviewHelp.append(jump);});panel.append(reviewHelp);}
     if(scope!=='site')panel.append(el('p','editor-intro','Update your guest guide below. Save changes when you are ready for guests to see them.'));
     if(scope==='cozy-roots')panel.append(el('p','editor-intro','Meals are served at Cozy Deck Restaurant, shared with Cozy Nest. Edit its hours, menu link and dining photo in the Cozy Nest tab; both guides use those settings.'));

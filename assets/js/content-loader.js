@@ -89,7 +89,7 @@
     if (!photos) return;
     document.querySelectorAll('img[data-photo]').forEach(function (el) {
       var url = photos[el.dataset.photo] || photos[el.dataset.fallbackPhoto];
-      if (safeUrl(url, true)) el.src = url;
+      if (safeUrl(url, true)) {el.src = url;if(el.hasAttribute('data-property-photo'))el.dataset.customPhoto='true';}
     });
     var map = { hero: 'hero-section', about: 'ph-about', dining: 'ph-dining', transfers: 'ph-transfers' };
     Object.keys(map).forEach(function (key) {
@@ -124,7 +124,7 @@
       fetchJson('/api/content?scope=' + encodeURIComponent(slug)).then(function (res) {
         if (!res || !res.data || !res.data.photos) return;
         var url = res.data.photos.about;
-        if (safeUrl(url, true)) document.querySelectorAll('[data-property-photo="' + slug + '"]').forEach(function (el) { el.src = url; });
+        if (safeUrl(url, true)) document.querySelectorAll('[data-property-photo="' + slug + '"]').forEach(function (el) { if(el.dataset.customPhoto!=='true')el.src = url; });
       });
     });
     if (!property) return;
