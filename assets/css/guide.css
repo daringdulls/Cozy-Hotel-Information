@@ -26,3 +26,5 @@
 @media print{.floating-reviews{display:none}}
 
 img[data-pending-photo]{visibility:hidden}
+
+.emergency-row[hidden]{display:none}

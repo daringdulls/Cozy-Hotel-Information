@@ -2,7 +2,7 @@
   var cache = {}, dirty = new Set();
   var scopes = ['site', 'cozy-nest', 'cozy-roots', 'cozy-arts'];
   var titles = {site:'Our hotels page & contacts','cozy-nest':'Cozy Nest','cozy-roots':'Cozy Roots','cozy-arts':'Cozy Art'};
-  var groups = {homepage:'Our hotels page — welcome text',reviews:'Guest review links',intro:'Welcome & about your hotel',hours:'Hotel hours',dining:'Restaurant',diving:'Diving',wifi:'Guest Wi-Fi',phones:'Contact numbers',notices:'Guest notices',explore:'Island highlights',photos:'Photo library',gallery:'Gallery title & captions',guestInfo:'Practical guest information',details:'More guest information'};
+  var groups = {homepage:'Our hotels page — welcome text',reviews:'Guest review links',intro:'Welcome & about your hotel',hours:'Hotel hours',dining:'Restaurant',diving:'Diving',wifi:'Guest Wi-Fi',phones:'Property contact numbers',emergencyContacts:'Emergency contacts — this property',notices:'Guest notices',explore:'Island highlights',photos:'Photo library',gallery:'Gallery title & captions',guestInfo:'Practical guest information',details:'More guest information'};
   function label(key) { return key.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/_/g,' ').replace(/\b\w/g,function (s) { return s.toUpperCase(); }); }
   function api(url, opts) { return fetch(url,Object.assign({credentials:'same-origin'},opts)).then(async function (r) { var body = await r.json(); if (!r.ok) throw new Error(body.error || 'Request failed. Try again.'); return body; }); }
   function el(tag, cls, text) { var node=document.createElement(tag); if(cls) node.className=cls; if(text!==undefined)node.textContent=text; return node; }
@@ -32,6 +32,10 @@
     var field=el('div','field'),id=scope+'-'+path.replaceAll('.','-');
     var fieldLabel=path.startsWith('details.') ? label(path.split('.')[1].replace(/_\d+$/, ''))+' — '+value.slice(0,65)+(value.length>65?'…':'') : label(path.split('.').pop());
     if(scope==='site'&&path.startsWith('photos.'))fieldLabel=({'photos.logo':'Our hotels page — header & footer logo','photos.hero':'Our hotels page — large hero image','photos.nestCard':'Cozy Nest card image','photos.rootsCard':'Cozy Roots card image','photos.artCard':'Cozy Art card image'})[path]||fieldLabel;
+    if(path==='phones.hotel')fieldLabel='Reception / guest WhatsApp number';
+    if(path==='phones.diving')fieldLabel='Diving / reservations number';
+    if(path==='emergencyContacts.hospital')fieldLabel='Hospital / health centre number';
+    if(path==='emergencyContacts.islandEmergency')fieldLabel='Island emergency number';
     if(path==='menuUrl')fieldLabel='Cozy Deck — public menu link';
     if(path==='roomServiceUrl')fieldLabel='Cozy Deck — room service ordering link';
     if(path==='reviews.googleUrl')fieldLabel='Google review link';
@@ -62,8 +66,10 @@
     if(scope==='cozy-roots')panel.append(el('p','editor-intro','Meals are served at Cozy Deck Restaurant, shared with Cozy Nest. Edit its hours, menu link and dining photo in the Cozy Nest tab; both guides use those settings.'));
     var entries=Object.entries(data);
     if(scope!=='site'){entries=entries.filter(function(pair){return pair[0]!=='reviews';});entries.unshift(['reviews',Object.assign({googleUrl:'',tripadvisorUrl:''},data.reviews||{})]);}
+    if(scope!=='site')entries.sort(function(a,b){var order=['phones','emergencyContacts','reviews'];var x=order.indexOf(a[0]),y=order.indexOf(b[0]);return (x<0?99:x)-(y<0?99:y);});
     entries.forEach(function(pair){var key=pair[0],value=pair[1];if(['cozy-roots','cozy-arts'].includes(scope)&&['dining','menuUrl'].includes(key))return;if(typeof value==='string'){panel.append(makeField(scope,key,value));return;}
       var group=el('details','editor-group');group.open=key!=='details';group.append(el('summary','',groups[key]||label(key)));
+      if(key==='emergencyContacts')group.append(el('p','editor-intro','Set the emergency numbers for this property and island. Hospital and island emergency contacts appear after you enter a number.'));
       if(key==='phones')group.append(el('p','editor-intro',scope==='site'?'Shared phone and WhatsApp contacts used throughout the guides.':'These phone and WhatsApp numbers apply everywhere in this property guide. Leave blank to use shared contacts.'));
       if(key==='gallery')group.append(el('p','editor-intro','Captions 1–4 match gallery photos 1–4 from left to right. Update the caption when replacing its photo.'));
       if(key==='reviews')group.append(el('p','editor-intro','Paste the Google review and Tripadvisor links for this property. Each button appears on the guest guide after its link is saved. Leave a link blank to hide that option.'));

@@ -22,3 +22,6 @@ body:has(.panel.active[data-panel="cozy-roots"]) .tabs{background:#ecddcb;}
 .panel[data-panel="cozy-roots"] .save-row .btn-primary{background:#b4442a;color:#ffffff;border-color:#b4442a;}
 
 .tab-btn{color:#173d38;background:#fff}.tab-btn.active,.tab-btn.active:hover{background:#0f4d46;color:#fff}.tab-btn[data-scope="cozy-arts"].active{background:#9c260e;color:#fff}
+
+/* Keep upload action labels readable above property label colours. */
+.panel[data-panel] .field .upload-label{color:#fff!important;-webkit-text-fill-color:#fff;font-weight:700}

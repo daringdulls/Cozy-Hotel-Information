@@ -157,5 +157,12 @@
     "hotel": "",
     "diving": "",
     "restaurant": ""
+  },
+  "emergencyContacts": {
+    "police": "119",
+    "ambulance": "102",
+    "fire": "118",
+    "hospital": "",
+    "islandEmergency": ""
   }
 }

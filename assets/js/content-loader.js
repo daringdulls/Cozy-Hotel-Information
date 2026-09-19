@@ -140,6 +140,13 @@
     jobs.push(fetchJson('/api/content?scope=' + encodeURIComponent(property)).then(function (res) {
       if (!res || !res.data) return;
       applyFields(res.data);
+      document.querySelectorAll('[data-emergency-contact]').forEach(function(a){
+        var key=a.dataset.emergencyContact, contacts=res.data.emergencyContacts||{};
+        if(!(key in contacts))return;
+        var number=String(contacts[key]||'').trim(), clean=digits(number);
+        a.closest('.emergency-row').hidden=!clean;
+        if(clean){a.href='tel:'+(number.startsWith('+')?'+':'')+clean;a.textContent=number;}else a.removeAttribute('href');
+      });
       applyMenuLink(res.data.menuUrl);
       applyRoomService(res.data.roomServiceUrl);
       propertyPhones={};Object.keys(res.data.phones||{}).forEach(function(key){if(res.data.phones[key])propertyPhones[key]=res.data.phones[key];});
