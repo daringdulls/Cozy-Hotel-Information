@@ -32,6 +32,8 @@
     var field=el('div','field'),id=scope+'-'+path.replaceAll('.','-');
     var fieldLabel=path.startsWith('details.') ? label(path.split('.')[1].replace(/_\d+$/, ''))+' — '+value.slice(0,65)+(value.length>65?'…':'') : label(path.split('.').pop());
     if(scope==='site'&&path.startsWith('photos.'))fieldLabel=({'photos.logo':'Our hotels page — header & footer logo','photos.hero':'Our hotels page — large hero image','photos.nestCard':'Cozy Nest card image','photos.rootsCard':'Cozy Roots card image','photos.artCard':'Cozy Art card image'})[path]||fieldLabel;
+    if(path==='menuUrl')fieldLabel='Cozy Deck — public menu link';
+    if(path==='roomServiceUrl')fieldLabel='Cozy Deck — room service ordering link';
     if(path==='reviews.googleUrl')fieldLabel='Google review link';
     if(path==='reviews.tripadvisorUrl')fieldLabel='Tripadvisor review link';
     var caption=el('label','',fieldLabel);caption.htmlFor=id;field.append(caption);

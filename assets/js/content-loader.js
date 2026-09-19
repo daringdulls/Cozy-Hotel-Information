@@ -72,11 +72,15 @@
   }
 
   function applyMenuLink(url) {
-    var el = document.getElementById('menu-link');
-    if (el) {
-      el.setAttribute('href', safeUrl(url) ? url : 'https://wa.me/9607873535?text=Hello%2C%20could%20you%20share%20the%20restaurant%20menu%3F');
-      if (!safeUrl(url)) el.textContent = 'Ask for the menu';
-    }
+    document.querySelectorAll('[data-menu-link], #menu-link').forEach(function(el){
+      el.href = safeUrl(url) ? url : 'https://cozydeck.pixelatemv.com/menu';
+      el.textContent = 'View menu'; el.target = '_blank'; el.rel = 'noopener';
+    });
+  }
+  function applyRoomService(url) {
+    document.querySelectorAll('[data-room-service]').forEach(function(el){
+      el.href = safeUrl(url) ? url : 'https://cozydeck.pixelatemv.com/room-service';
+    });
   }
 
   function safeUrl(url, image) {
@@ -133,6 +137,7 @@
       if (!res || !res.data) return;
       applyFields(res.data);
       applyMenuLink(res.data.menuUrl);
+      applyRoomService(res.data.roomServiceUrl);
       if (sitePhones) applyPhones(sitePhones);
       applyPhotos(res.data.photos);
       var reviewSection = document.querySelector('.review-section');

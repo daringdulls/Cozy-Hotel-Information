@@ -18,7 +18,7 @@
     "password": "Ask reception"
   },
   "policies": "No smoking indoors · quiet hours 22:00–07:00",
-  "menuUrl": "",
+  "menuUrl": "https://cozydeck.pixelatemv.com/menu",
   "notices": {
     "transfer": "Flight and ferry schedules to Fuvahmulah can shift with weather. Please confirm your transfer time with reception the evening before departure.",
     "rules": "Guest rules: no smoking indoors, quiet hours 22:00–07:00, and please respect local dress customs when exploring outside the hotel."
@@ -151,5 +151,6 @@
   "reviews": {
     "googleUrl": "",
     "tripadvisorUrl": ""
-  }
+  },
+  "roomServiceUrl": "https://cozydeck.pixelatemv.com/room-service"
 }
