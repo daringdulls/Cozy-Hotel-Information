@@ -143,14 +143,19 @@
   },
   "gallery": {
     "title": "A little look around",
-    "caption1": "Your island stay",
-    "caption2": "Rooms & spaces",
-    "caption3": "Dining at Cozy Nest",
-    "caption4": "Underwater adventures"
+    "caption1": "In-room amenities",
+    "caption2": "Bathroom & bathtub",
+    "caption3": "Cozy Deck exterior",
+    "caption4": "Guest room"
   },
   "reviews": {
     "googleUrl": "",
     "tripadvisorUrl": ""
   },
-  "roomServiceUrl": "https://cozydeck.pixelatemv.com/room-service"
+  "roomServiceUrl": "https://cozydeck.pixelatemv.com/room-service",
+  "phones": {
+    "hotel": "",
+    "diving": "",
+    "restaurant": ""
+  }
 }

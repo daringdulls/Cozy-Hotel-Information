@@ -128,5 +128,10 @@
   "reviews": {
     "googleUrl": "",
     "tripadvisorUrl": ""
+  },
+  "phones": {
+    "hotel": "",
+    "diving": "",
+    "restaurant": ""
   }
 }

@@ -24,3 +24,5 @@
 .floating-review-panel a{display:block;padding:12px;margin-top:8px;border:1px solid currentColor;border-radius:8px;color:var(--green);font-weight:600}
 .floating-review-panel a[hidden]{display:none}
 @media print{.floating-reviews{display:none}}
+
+img[data-pending-photo]{visibility:hidden}

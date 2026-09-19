@@ -20,3 +20,5 @@ body:has(.panel.active[data-panel="cozy-roots"]) .tabs{background:#ecddcb;}
 .panel[data-panel="cozy-roots"] :is(input,textarea,.photo-grid .field){background:#ecddcb;border-color:#d2b18a;}
 .panel[data-panel="cozy-roots"] .upload-label{background:#7a4c2a;}
 .panel[data-panel="cozy-roots"] .save-row .btn-primary{background:#b4442a;color:#ffffff;border-color:#b4442a;}
+
+.tab-btn{color:#173d38;background:#fff}.tab-btn.active,.tab-btn.active:hover{background:#0f4d46;color:#fff}.tab-btn[data-scope="cozy-arts"].active{background:#9c260e;color:#fff}

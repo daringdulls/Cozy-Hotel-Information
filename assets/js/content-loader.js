@@ -3,7 +3,7 @@
    if the API is unreachable (e.g. plain static hosting, offline, DB not
    yet connected) the page still reads correctly — this only upgrades it. */
 (function () {
-  var sitePhones;
+  var sitePhones, propertyPhones;
   var PHONE_PLACEHOLDERS = {
     hotel: '9607721818',
     diving: '9607909494',
@@ -15,7 +15,7 @@
   }
 
   function fetchJson(url) {
-    return fetch(url, { credentials: 'same-origin' })
+    return fetch(url, { credentials: 'same-origin', signal: AbortSignal.timeout(12000) })
       .then(function (r) { return r.ok ? r.json() : null; })
       .catch(function () { return null; });
   }
@@ -30,7 +30,8 @@
     if (!Object.keys(map).length) return;
 
     document.querySelectorAll('a[href^="tel:+"], a[href^="https://wa.me/"]').forEach(function (a) {
-      var href = a.getAttribute('href');
+      var href = a.dataset.contactTemplate || a.getAttribute('href');
+      a.dataset.contactTemplate = href;
       Object.keys(map).forEach(function (oldNum) {
         if (href.indexOf(oldNum) !== -1) {
           href = href.split(oldNum).join(map[oldNum]);
@@ -112,33 +113,37 @@
   }
 
   function init() {
+    var jobs=[];
+    function finishPhotos(){document.querySelectorAll('[data-pending-photo]').forEach(function(img){if(!img.getAttribute('src')||img.getAttribute('src').startsWith('data:image/gif;'))img.src=img.dataset.defaultSrc;img.removeAttribute('data-pending-photo');});}
+
     applyMenuLink('');
-    fetchJson('/api/content?scope=site').then(function (res) {
+    jobs.push(fetchJson('/api/content?scope=site').then(function (res) {
       if (res && res.data) {
         if(document.body.classList.contains('hotel-hub')){applyFields(res.data);applyPhotos(res.data.photos);}
         sitePhones = res.data.phones;
-        applyPhones(res.data.phones);
+        applyPhones(Object.assign({},sitePhones,propertyPhones||{}));
         applyInstagram(res.data.instagram);
       }
-    });
+    }));
 
     var property = document.body.getAttribute('data-property');
     var propertyKeys = new Set(Array.from(document.querySelectorAll('[data-property-photo]')).map(function (el) { return el.dataset.propertyPhoto; }));
     propertyKeys.forEach(function (slug) {
-      fetchJson('/api/content?scope=' + encodeURIComponent(slug)).then(function (res) {
+      jobs.push(fetchJson('/api/content?scope=' + encodeURIComponent(slug)).then(function (res) {
         if (!res || !res.data || !res.data.photos) return;
         var url = res.data.photos.about;
         if (safeUrl(url, true)) document.querySelectorAll('[data-property-photo="' + slug + '"]').forEach(function (el) { if(el.dataset.customPhoto!=='true')el.src = url; });
-      });
+      }));
     });
-    if (!property) return;
+    if (!property) {Promise.allSettled(jobs).then(finishPhotos);return;}
 
-    fetchJson('/api/content?scope=' + encodeURIComponent(property)).then(function (res) {
+    jobs.push(fetchJson('/api/content?scope=' + encodeURIComponent(property)).then(function (res) {
       if (!res || !res.data) return;
       applyFields(res.data);
       applyMenuLink(res.data.menuUrl);
       applyRoomService(res.data.roomServiceUrl);
-      if (sitePhones) applyPhones(sitePhones);
+      propertyPhones={};Object.keys(res.data.phones||{}).forEach(function(key){if(res.data.phones[key])propertyPhones[key]=res.data.phones[key];});
+      applyPhones(Object.assign({},sitePhones||{},propertyPhones));
       applyPhotos(res.data.photos);
       var reviewSection = document.querySelector('.review-section');
       if (reviewSection) {
@@ -153,7 +158,8 @@
         var floating = document.querySelector('.floating-reviews');
         if(floating) floating.hidden = count === 0;
       }
-    });
+    }));
+    Promise.allSettled(jobs).then(finishPhotos);
   }
 
   if (document.readyState === 'loading') {
